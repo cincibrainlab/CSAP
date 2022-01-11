@@ -5,11 +5,11 @@
 Library of associated scripts to generate windowed datasets of Cooled vs. Non-Cooled Neonatal subject data along with codebase of preprocessing pipeline to clean resulting datasets and generate features.
 
 ## Processing Pathway
-		 Library of Matlab script files provide methods to perform various functions required when working with NICU datasets such as:
-			1. Obtaining metadata from .EDF recording files and renaming files with associated recording details: subject-id_date_start-time
-			2. Various pathways of cleaning data for different types: cooling, rewarming, followup, non-cooling
-			3. Identify and convert flatline periods of recordings to NaNs
-			4. Feature Generation from final preprocessed datasets
+	 Library of Matlab script files provide methods to perform various functions required when working with NICU datasets such as:
+		1. Obtaining metadata from .EDF recording files and renaming files with associated recording details: subject-id_date_start-time
+		2. Various pathways of cleaning data for different types: cooling, rewarming, followup, non-cooling
+		3. Identify and convert flatline periods of recordings to NaNs
+		4. Feature Generation from final preprocessed datasets
 
 ## Preprocessing Steps
 	Stage 1
