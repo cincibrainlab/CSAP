@@ -249,7 +249,7 @@ OUTPUT:
     HFD: the HFD of the temporal series.
 PROJECT: Research Master in signal theory and bioengineering - University of Valladolid
 DATE: 02/03/2014
-AUTHOR: Jes�s Monge �lvarez
+AUTHOR: Jesus Monge Alvarez
 %}
 %% Checking the ipunt parameters:
 control = ~isempty(serie);
