@@ -17,7 +17,7 @@ format long;
 
 for m=1:length(files)
     EEG = pop_loadset(files(m).name,files(m).folder); 
-    binName = char(regexp(EEG.setname,'Bin_\d','match'));
+    binName = char(regexp(EEG.setname,'Bin_\d*','match'));
     if contains(regexp(files(m).folder,'\w*.$','match'),{'followup','Non_Cooling'})
         processName = [char(regexp(EEG.setname,'(?<=\Bin_\d_)\w*(?=\_\d)','match')) '_' char(regexp(files(m).folder,'\d*.$','match'))];
     else
@@ -249,7 +249,7 @@ OUTPUT:
     HFD: the HFD of the temporal series.
 PROJECT: Research Master in signal theory and bioengineering - University of Valladolid
 DATE: 02/03/2014
-AUTHOR: Jesús Monge Álvarez
+AUTHOR: Jesï¿½s Monge ï¿½lvarez
 %}
 %% Checking the ipunt parameters:
 control = ~isempty(serie);
