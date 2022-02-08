@@ -72,8 +72,7 @@ if params.stacked
     if obj.firstrun(obj.current_row,obj.current_column)
         %Store heights at the level of dodge x
         obj.extra.stacked_bar_height=zeros(1,length(draw_data.facet_x));
-        %obj.plot_lim.minx(obj.current_row,obj.current_column)=min(x)-width;
-        %obj.plot_lim.maxx(obj.current_row,obj.current_column)=max(x)+width;
+        
     end
     
     % Stack index is used to keep track of the stacks

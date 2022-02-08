@@ -70,7 +70,7 @@ end
 if iscell(draw_data.x) || iscell(draw_data.y) %If input was provided as cell/matrix
     
     %Duplicate the draw data
-    %new_draw_data=draw_data;
+    
     if isstr(params.lambda)
         disp('''auto'' parameter in stat_smooth not supported for cell input')
         params.lambda = 1000;
@@ -81,7 +81,7 @@ if iscell(draw_data.x) || iscell(draw_data.y) %If input was provided as cell/mat
     for k=1:length(draw_data.y) %then we smooth each trajectory independently
         if ~isempty(draw_data.y{k})
             
-            %[tempy(k,:),tempx(k,:)] = scatsm(draw_data.x{k}, draw_data.y{k}, params.lambda, 2, params.npoints);
+            
             [tempx(k,:),tempy(k,:)] = fun(shiftdim(draw_data.x{k}), shiftdim(draw_data.y{k}));
         end
     end
@@ -179,83 +179,7 @@ else
     
     
     
-    %     if 1
-    %         %Super fast spline smoothing !!
-    %         if length(combx)>3
-    %             if isstr(params.lambda) && strcmp(params.lambda,'auto')
-    %                %
-    %               cvs = [];
-    %             lambdas = 10 .^ (0:.2:7);
-    %             for lambda = lambdas
-    %                 [newy,newx, cv] =scatsm(combx, comby, lambda, 2, params.npoints);
-    %                 cvs = [cvs cv];
-    %             end
-    %             [cvm cvi] = min(cvs);
-    %             lambda=lambdas(cvi);
-    %                [newy,newx] = scatsm(combx, comby, lambda, 2, params.npoints);
-    %
-    %             else
-    %                 [newy,newx] = scatsm(combx, comby, params.lambda, 2, params.npoints);
-    %                 lambda=params.lambda;
-    %             end
-    %         else
-    %             newx=NaN;
-    %             newy=NaN;
-    %         end
-    %         if length(combx)>10
-    %
-    %             booty=zeros(obj.stat_options.nboot,params.npoints);
-    %             bootx=zeros(obj.stat_options.nboot,params.npoints);
-    %             %Bootstap without using bootstrp() in order to get both x and y values
-    %             for k=1:obj.stat_options.nboot
-    %                 %We select a random sample of the points with replacement
-    %                 sampind=randi(length(combx),length(combx),1);
-    %                 [booty(k,:),bootx(k,:)]=scatsm(combx(sampind),comby(sampind),lambda,2,params.npoints);
-    %
-    %                 %Problem: the spline smoother chooses the x values for the
-    %                 %smooth... so we need to interpolate to get y values at
-    %                 %No extrapolation
-    %                 booty(k,:)=interp1(bootx(k,:),booty(k,:),newx,'pchip',NaN);
-    %                 bootx(k,:)=newx;
-    %             end
-    %
-    %             % Way of handling missing values at the edge due to
-    %             % bootstrapping inspired by http://content.csbs.utah.edu/~rogers/datanal/R/scatboot.r
-    %             % The confidence interval is an interval that contains 1-alpha
-    %             % proportion of the samples
-    %             yci=nan(2,length(newx));
-    %             %Count number of nans
-    %             n_nan = sum(isnan(booty));
-    %             for k=1:length(newx)
-    %
-    %                 if  n_nan(k) <= obj.stat_options.nboot * obj.stat_options.alpha %if too many nans we can't estimate the CI
-    %                     %If not too many nans, we correct the interval depending on number of nans
-    %                     conf = (1-obj.stat_options.alpha) * obj.stat_options.nboot/(obj.stat_options.nboot - n_nan(k) );
-    %                     pr = 0.5 * (1-conf);
-    %                     yci(:,k)= prctile(booty(:,k),100*[pr 1-pr]);
-    %                 end
-    %             end
-    %         else
-    %             yci=nan(2,length(newx));
-    %         end
-    %     else
-    %         fops=fitoptions('smoothingspline');
-    %         fops.SmoothingParam=params.lambda;
-    %         newx=linspace(obj.var_lim.minx,obj.var_lim.maxx,params.npoints);
-    %         if length(combx)>3
-    %             ft=fit(combx,comby,'smoothingspline',fops);
-    %             newy=feval(ft,newx);
-    %         else
-    %             newx=NaN;
-    %             newy=NaN;
-    %         end
-    %         if length(combx)>10
-    %             booty=bootci(obj.stat_options.nboot,@(ax,ay)feval(fit(ax,ay,'smoothingspline',fops),newx),combx,comby);
-    %             yci=prctile(booty,100*[obj.stat_options.alpha/2 1-obj.stat_options.alpha/2]);
-    %        else
-    %             yci=nan(2,length(newx));
-    %         end
-    %     end
+    
     
     
     obj.results.stat_smooth{obj.result_ind,1}.x=newx;

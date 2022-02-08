@@ -45,9 +45,6 @@ if opt.nonempt
         outlist.(flds{f})(kill) = [];
     end
 
-    % outlist.name(kill) = [];
-    % outlist.color(kill,:) = [];
-    % outlist.value(kill) = [];
 end
         
 

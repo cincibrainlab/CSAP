@@ -63,10 +63,7 @@ handles.UniOrig = get(0, 'Units');
 % [?] why setting figure1 to visible if units are not pixels?
 if ~strcmp(handles.UniOrig, 'pixels')
     set(handles.figure1, 'Visible', 'on');
-    %     set(0, 'Units', 'pixels');
-    %     set(handles.figure1, 'Units', 'pixels');
-    %     set(get(handles.figure1, 'Children'),...
-    %         'Units', 'pixels');
+    
 end
 
 % CHANGE:
@@ -412,7 +409,7 @@ else
 end
 
 % % which can be recovered:
-% cansel = sel(handles.recov(sel));
+
 
 cansel = sel;
 
@@ -500,7 +497,7 @@ else
 end
 
 % which can be applied:
-% cansel = sel(handles.recov(sel));
+
 cansel = sel;
 
 % sif none can be selected:
@@ -597,7 +594,7 @@ else
 end
 
 % which can be applied:
-% cansel = sel(handles.recov(sel));
+
 cansel = sel;
 
 % sif none can be selected:

@@ -208,23 +208,7 @@ else %If input was provided as 1D array
         x=bincenters(binind(sel));
         y=y(sel);
     else
-        %         if sum(strcmp(params.geom,'area'))>0 || sum(strcmp(params.geom,'line'))>0 ||...
-        %                 sum(strcmp(params.geom,'lines'))>0  || sum(strcmp(params.geom,'solid_area'))>0
-        %             %To avoid interruptions in line and area plots we
-        %             %compute uniques over current data only
-        %             uni_x=unique(x); %Sorted is the default
-        %         else
-        %             if obj.x_factor
-        %                 %If x is a factor we space everything as one
-        %                 uni_x=obj.var_lim.minx:1:obj.var_lim.maxx;
-        %             else
-        %                 %compute unique Xs at the facet level to avoid
-        %                 %weird bar sizing issues when dodging and when
-        %                 %colors are missing
-        %                 facet_x=comb(draw_data.facet_x);
-        %                 uni_x=unique(facet_x);
-        %             end
-        %         end
+        
         
         uni_x=unique(x);
         
@@ -323,9 +307,7 @@ if params.bin_in>0 || params.interp_in>0 || ~strcmp(params.interp,'none')
     draw_data.dodge_n=draw_data.n_colors;
     draw_data.dodge_ind=draw_data.color_index;
     
-    %draw_data.dodge_x=shiftdim(uni_x);
-    %draw_data.dodge_n=repmat(draw_data.n_colors,length(uni_x),1);
-    %draw_data.dodge_ind=repmat(draw_data.color_index,length(uni_x),1);
+    
 end
 
 %Store results
@@ -384,7 +366,7 @@ try
         case 'bootci'
             yci=bootci(nboot,{@(ty)nanmean(ty),y},'alpha',alpha);
         case 'ci'
-            %ci=1.96*nanstd(y)./sqrt(sum(~isnan(y)));
+            
             %Correction for small samples (equivalent to fitnormalci)
             ci=tinv(1-alpha/2,sum(~isnan(y))-1).*nanstd(y)./sqrt(sum(~isnan(y)));
             yci=bsxfun(@plus,ymean,[-ci;ci]);

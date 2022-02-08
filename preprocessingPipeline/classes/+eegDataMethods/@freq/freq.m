@@ -11,7 +11,7 @@ classdef freq < handle
         function o = freq( )
             
             o.ftcfg.freqFTplot.chanArr = 1;
-            % o.s = s;
+            
             
             o.ftcfg.freqFToutput = [];
             o.ftcfg.freqFTconfig = [];

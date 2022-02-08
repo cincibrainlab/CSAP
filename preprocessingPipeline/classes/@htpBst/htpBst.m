@@ -37,12 +37,7 @@ classdef htpBst < handle
 
         function obj = htpBst()
 
-            %             % initiate object with htpBaseMasterObject
-            %             try
-            %                 o.am = htpBaseMasterObject;
-            %             catch
-            %                 fprintf('No htpBaseMaster object found (am).')
-            %             end
+            
             obj.taghx{1} = 'Start Tag history';
         end
 
@@ -207,7 +202,7 @@ classdef htpBst < handle
         function sFiles = bst_controller_recordings(o, cmd, sFiles)
 
             if nargin < 3
-                %idx = o.bst_searchSubjectString( sFiles, 'FileName', 'Group2');
+                
                 sFiles = o.bst_getAllRecordings();
             end
 
@@ -237,10 +232,9 @@ classdef htpBst < handle
 
             r = o.bst_generateRandomTag;
 
-            %  o.bst_quitBstServer;
-            %   o.bst_startBstServerProtocol('P1htpBstTest');
+            
             if nargin < 3
-                %idx = o.bst_searchSubjectString( sFiles, 'FileName', 'Group2');
+                
                 sFiles = o.bst_getAllSources();
             end
 
@@ -275,7 +269,7 @@ classdef htpBst < handle
 
                     case 'withinChanDirectPac'
 
-                        %res(:,i) = o.bst_withinChanDirectPac( cfg, sFile );
+                        
 
                         ipac{i} = o.bst_withinChanDirectPac(cfg, sFile);
 
@@ -295,14 +289,13 @@ classdef htpBst < handle
 
         function sFiles = bst_controller_timefrequency(o, cmd, sFiles)
             [mc, mm, mw] = o.tools_log; % output log
-            % calcpow = @o.bst_calcSpectralPower;
+            
 
             r = o.bst_generateRandomTag;
 
-            %  o.bst_quitBstServer;
-            %   o.bst_startBstServerProtocol('P1htpBstTest');
+            
             if nargin < 3
-                %idx = o.bst_searchSubjectString( sFiles, 'FileName', 'Group2');
+                
                 sFiles = o.bst_getAllTimeFrequency();
             end
 
@@ -371,7 +364,7 @@ classdef htpBst < handle
                 switch cmd
                     case 'withinChanDirectPac'
 
-                        %res(:,i) = o.bst_withinChanDirectPac( cfg, sFile );
+                        
 
                         ipac{i} = o.bst_withinChanDirectPac(cfg, sFile);
 
@@ -384,7 +377,7 @@ classdef htpBst < handle
                     otherwise
                 end
 
-               % sFile = o.bst_addTag(sFile, r, tag);
+               
                 
                 sFiles(i) = sFile;
             end
@@ -392,7 +385,7 @@ classdef htpBst < handle
             cfg.sFiles = sFiles;
             try
             ipac_save_file = fullfile(o.htpcfg.pathdb.analysis, [cfg.desc '_' r '_.mat']);
-            %ipac_save_file = fullfile(o.htpcfg.pathdb.analysis, [cfg.desc '.mat']);
+            
             save(ipac_save_file, 'ipac');
             cfg.filename = ipac_save_file;
             catch
@@ -441,7 +434,7 @@ classdef htpBst < handle
 
             function sFile = bst_computeHeadModel(o, sFile)
 
-                % ProtocolInfo = bst_get('ProtocolInfo');
+                
 
                 % Process: Compute head model
                 sFile = bst_process('CallProcess', 'process_headmodel', sFile, [], ...
@@ -557,7 +550,7 @@ classdef htpBst < handle
                     ipac.chanlocs = sProps.F.header.EEG.chanlocs;
                 end
 
-                %cfg.srate = round(sProps.F.prop.sfreq);
+                
 
                 cfg.isParallel = 0;
                 cfg.isMex = 1;
@@ -645,14 +638,13 @@ classdef htpBst < handle
                             disp('Invalid method name.');
                     end
 
-                    % [TF, ERP, TimeOut, chirp_center_high, errMsg] = o.bst_ComputeCanoltyMap(Fblock(1,:), cfg.srate, cfg.nesting, [-.500 .500])
+                    
                     % gpuversion output DirectPAC_block nbchan 1 3 9
                     gpu_tmppac = squeeze(DirectPAC_block);
 
                     for i = 1:length(DirectPAC_block)
                         tmppac = squeeze(gpu_tmppac(i, :, :));
-                        %tmppac = squeeze(DirectPAC_block);
-                        %tmppac = squeeze(tmppac(1, :, :));
+                        
 
                         tmppac_meanphase = mean(tmppac, 1);
 
@@ -723,16 +715,11 @@ classdef htpBst < handle
                 res = ipac;
                 toc;
 
-                %  [MI, distKL] = pk_modulationIndex(Fblock(1,:),
-                % %  Fblock(1,:),18); % Rui curious
-                %DirectPAC_block = [];
-                %DirectPAC_block = PAC_block;
+                
 
-                % get single channel
-                %size(DirectPAC_block)
+                
 
-                % gpuVersion 128/3/9
-                % gpu_tmppac = squeeze(DirectPAC_block);
+               
 
                 figureson = false;
                 tableon = false;
@@ -754,7 +741,7 @@ classdef htpBst < handle
                     X = HighFreqs;
                     Y = [tmppac; mean(tmppac, 1)]; %_meanphase;
 
-                    %mean(tmppac,2)
+                    
 
                     figure;
                     g(row, col) = gramm('X', X, 'Y', Y, 'Color', [LowFreqs; 'Test'])% 1:size(Y, 1));
@@ -778,18 +765,11 @@ classdef htpBst < handle
 
                 end
 
-                %   end
-                %res = squeeze(DirectPAC_block);
-                %res_mean = mean(mean(res,3),2);
+                
 
-                %  res2 = in_bst_data(sFile.FileName)
+                
 
-                %  chanlocs = res2.F.header.EEG.chanlocs;
-
-                %  topoplot(res_mean, chanlocs)
-                %bst_pac(Fblock, sRate,
-                % OPTIONS.BandNesting, OPTIONS.BandNested, OPTIONS.isParallel,
-                % OPTIONS.isMex, OPTIONS.NumFreqs);
+                
 
             end
 
@@ -891,7 +871,7 @@ classdef htpBst < handle
             end
 
             function result_table = generate_PowTable(o, cfg, sFiles, grpInfo)
-                % cfg = [];
+                
 
                 % mark scout time series
                  sFiles = o.bst_controller_sources('scoutTimeSeries', sFiles, cfg);
@@ -980,7 +960,7 @@ classdef htpBst < handle
                         title(str);
                         topoplot(pacmean(cfg.select_chans), selchans, 'maplimits', pacscale, 'conv', 'on')
                         counter = counter + 1;
-                        %cbar('horiz',0,[-1 1].*max(abs(grp1mean(select_chan))));
+                        
 
                     end
 
@@ -1047,7 +1027,7 @@ classdef htpBst < handle
                             case 'source'
                                 % specific for bst Source Atlas
                                 for chan_i = 1:chanlocs_N
-                                    % disp(chan_i);
+                                    
                                     tmpchan = chanlocs(chan_i);
                                     atlas = tmpchan.Label;
                                     seed = tmpchan.Seed;
@@ -1149,10 +1129,7 @@ classdef htpBst < handle
 
                                 end
 
-                                %pactbl ='[pacheader; pacrow];
-                                %      pactbl = cell2table(pacrow,'VariableNames', pacheader);
-                                % %       pactbl_fn = fullfile(o.htpcfg.pathdb.analysis, ['pacChanTbl_' r '_.csv']);
-                                %        writetable(pactbl, pactbl_fn);
+                                
                             otherwise
 
                         end
@@ -1243,7 +1220,7 @@ classdef htpBst < handle
 
             function o = bst_topoplot_pac_group(o, cfg)
 
-                % ipac_N = length( ipac );
+                
 
                 tmpvar = load(cfg.filename);
 
@@ -1296,7 +1273,7 @@ classdef htpBst < handle
                         end
 
                         pacscale = [ min(min(tmppac)) max(max(tmppac))];
-                        %pacscale = [0.005 0.10];
+                        
 
                         % plot PAC per channel per group
                         pacscale = [min(grp1mean)-0.001 max(grp1mean)];
@@ -1344,7 +1321,7 @@ classdef htpBst < handle
                             chan_hood(select_chan, select_chan), 5000, 0.05, -1, .05, 2, [], 1); % FXS<TDC
 
                         subplot(2, 2, 3); topoplot(t_orig1(:, 1), chanlocs(select_chan), 'conv', 'off');
-                        %cbar('vert',0,[-1 1].*max(abs(t_orig1)));
+                        
                         hold on;
                         topoplot(pval1(:, 1) < 0.05, chanlocs(select_chan), 'maplimits', 'maxmin', ...
                             'style', 'blank');
@@ -1377,7 +1354,7 @@ classdef htpBst < handle
                         dat = [feat.grp1_dat feat.grp2_dat];
                         close(gcf);
 
-                        % idxMF = {o.sub(:).subj_gender};
+                        
                         clear g;
 
                         % plot 1: significant electrode box/scatter plot
@@ -1405,15 +1382,14 @@ classdef htpBst < handle
                         mean_all_grp1 = mean(alldat(idx1));
                         mean_all_grp2 = mean(alldat(idx2));
 
-                        %alldat = [grp1mean grp2mean];
+                        
                         g(2, 1) = gramm('x', dat', 'color', grpidx);
                         g(2, 2) = gramm('x', alldat', 'color', allgrpidx);
 
                         g(2, 1).geom_vline('xintercept', [mean_sig_grp1; mean_sig_grp2], 'style', 'k-');
                         g(2, 2).geom_vline('xintercept', [mean_all_grp1; mean_all_grp2], 'style', 'k-');
 
-                        %  g(2,1).stat_density();
-                        %  g(2,2).stat_density();
+                        
                         g(2, 1).stat_bin('normalization', 'cdf', 'geom', 'stairs');
                         g(2, 2).stat_bin('normalization', 'cdf', 'geom', 'stairs');
 

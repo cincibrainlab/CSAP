@@ -66,9 +66,6 @@ arrayfun(@( s ) s.setopt( opt ), obj.sub, 'uni', 0);
 objStageStatus = obj.htpcfg.objStageStatus;
 objStageStatus_completed = obj.htpcfg.objStageStatus_completed;
 
-% obj.htpcfg.objStageStatus = find(obj.selectObjects(stage_last, obj.htpcfg.csvfile)); % current stage
-% obj.htpcfg.objStageStatus_completed = find(obj.selectObjects(stage_next, obj.htpcfg.csvfile)); % completed
-
 
 prev_files = 0; skip_files = 0; errorchk = 0;
 
@@ -104,8 +101,6 @@ for i = 1 : length(obj.sub)
             
             obj.msgout(sprintf('AB'), 'step_complete');
 
-            s.EEG = abPrep(s.EEG,abParams,trials);
-            s.EEG.data = reshape(s.EEG.data,s.EEG.nbchan,[],trials);
             s.EEG = eeg_checkset(s.EEG);
         else
             s.autobadsegmentspreterm;
@@ -162,7 +157,7 @@ for i = 1 : length(obj.sub)
         end
     end
 
-    %obj.sub(i) = s;
+    
     sub(i)=s;
 
 end
@@ -182,21 +177,6 @@ obj.createResultsCsv(obj.sub, 'postica', 'Default');
 
 end
 
-% function [params,EEG] = abParamInit(EEG)
-%     params.Approach = 'Total';
-%     params.Threshold = 50;
-%     params.Fs = EEG.srate;
-%     params.WindowSize = 10; % unit in second
-%     params.InData = double(EEG.data(reshape(find(~isnan(EEG.data(:,:,:))),size(EEG.data(:,:,:),1),[]))); % data matrix
-%     %params.InData = double(reshape(EEG.data,EEG.nbchan,[]));
-%     EEG.etc.abParams = struct();
-%     EEG.etc.abParams.Approach = params.Approach;
-%     EEG.etc.abParams.Threshold = params.Threshold;
-%     EEG.etc.abParams.Fs = params.Fs;
-%     EEG.etc.abParams.WindowSize = params.WindowSize;
-%     EEG.etc.stage3Method = 'AB Non-Dynamic';
-%     
-% end
 
 function [params,EEG] = abDynamicParamInit(EEG)
     prctile_threshold = 99.7;

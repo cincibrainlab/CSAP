@@ -26,11 +26,9 @@ function h=my_tightplot(m,n,p,gap,marg_h,marg_w,varargin)
 
 
 % single subplot dimensions:
-%height=(1-(m+1)*gap_vert)/m;
-%axh = (1-sum(marg_h)-(Nh-1)*gap(1))/Nh; 
+
 height=(1-(marg_h(2)+marg_h(1))-(m-1)*gap(1))/m;
-%width =(1-(n+1)*gap_horz)/n;
-%axw = (1-sum(marg_w)-(Nw-1)*gap(2))/Nw;
+
 width =(1-(marg_w(1)+marg_w(2))-(n-1)*gap(2))/n;
 
 % merged subplot position:

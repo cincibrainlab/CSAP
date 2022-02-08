@@ -15,7 +15,7 @@ elseif ind == 1
 elseif ind == 2
     W = ones(1,N1);
     W1 = tukeywin(N,r);
-    %W(1:r*N/2) = W1(1:r*N/2);
+    
     W(1:N1) = W1(1:N1);
 end
     

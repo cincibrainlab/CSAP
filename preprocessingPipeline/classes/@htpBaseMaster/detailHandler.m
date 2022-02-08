@@ -51,27 +51,7 @@ end
         end
     end
 
-%             if strcmp('postcomps', value)
-%
-%                 app.ComponentViewButton.Enable = 1;
-% %                 app.htpPC.sub = getSubject(app, value);
-%                 s = app.htpPC.sub(1);
-%                 s.loadDataset( app.stageselect );
-%
-%                 app.CompstoRemoveEditField.Value = mat2str(s.proc_removeComps);
-%                 app.EditCheckBox.Value = 0;
-%                 app.RemoveCheckBox.Value = 0;
-%                 app.ComponentViewButton.Enable = 1;
-%
-%                 if strcmp( 'postcomps', app.stageselect )
-%                     app.CompstoRemoveEditField.Enable = 0;
-%                     app.updateStatusText(sprintf('Loading Postcomp Data: %s', s.study_csv));
-%                     app.orig_removeComps = s.proc_removeComps;
-%                 end
-%
-%             else
-%                 app.ComponentViewButton.Enable = 0;
-%             end
+
 
 
 end

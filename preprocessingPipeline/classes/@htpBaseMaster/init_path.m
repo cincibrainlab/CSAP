@@ -42,28 +42,14 @@ try
     
     ap = @(x) addpath(x,'-end');
     
-    %     % experiment of choice, change path to experiment file
-    %     rmpath(genpath('experiments'));
-    %
-    %     switch htp_mode
-    %         case 'default'
-    %             currentExperiment = 'experiments/template';
-    %             agp(currentExperiment);
-    %     end
-    
-    %     obj.msgout(sprintf('Current Experiment Path: %s', currentExperiment), 'step_complete');
-    %     notify( obj, 'step_complete' );
     
     agp('config');
     agp('chanfiles');
     agp('analysis');
-    %agp('functions');
-    %agp('subclasses');
+    
     agp('classes');
     agp('docs');
-    %agp('templates');
-    %agp('external\eegdb');
-    %ap('external');
+    
     agp('external');
     ap('import');
     ap('gui');

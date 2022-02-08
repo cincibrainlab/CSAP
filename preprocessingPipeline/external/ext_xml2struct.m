@@ -115,8 +115,6 @@ function [children,ptext,textflag] = parseChildNodes(theNode)
                         %<element>Text <!--Comment--> More text</element>
                         
                         %put the text in different cells:
-                        % if (~iscell(ptext)) ptext = {ptext}; end
-                        % ptext{length(ptext)+1} = text;
                         
                         %just append the text
                         ptext.(ptextflag) = [ptext.(ptextflag) text.(textflag)];
@@ -166,9 +164,7 @@ function attributes = parseAttributes(theNode)
        numAttributes = getLength(theAttributes);
 
        for count = 1:numAttributes
-            %attrib = item(theAttributes,count-1);
-            %attr_name = regexprep(char(getName(attrib)),'[-:.]','_');
-            %attributes.(attr_name) = char(getValue(attrib));
+            
 
             %Suggestion of Adrian Wanner
             str = toCharArray(toString(item(theAttributes,count-1)))';

@@ -57,7 +57,7 @@ cfg.channel = 'all';
 cfg.method = 'mtmfft';
 cfg.taper = 'boxcar';
 cfg.pad='nextpow2';
-%cfg.keeptrials ='yes';
+
 
 foi1 = 0.5:1:45;
 foi2 = 0.5:0.5:45;

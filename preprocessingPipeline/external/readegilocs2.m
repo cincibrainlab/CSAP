@@ -52,7 +52,7 @@ found = 1;
 if nargin < 2
     switch EEG.nbchan
         case { 32 33 }, fileloc = 'GSN-HydroCel-32.sfp';
-            % case { 64 65 }, fileloc = 'GSN65v2_0.sfp';
+            
             
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             % modified 4/7/2018 E. Pedapati to specify hydrocel nets
@@ -76,13 +76,10 @@ if found
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     
     % modified 4/7/2018 E. Pedapati to sfp file in working directory
-    % disp(mfilename)
-    %peeglab = fileparts(which(mfilename));
-    %fileloc = fullfile(peeglab, fileloc);
+    
     disp('Modified');
     chanfile = fileloc;
-    %peeglab = fileparts(which('eeglab.m'));
-    %fileloc = fullfile(peeglab, 'sample_locs', fileloc);
+    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     locs = readlocs(fileloc);

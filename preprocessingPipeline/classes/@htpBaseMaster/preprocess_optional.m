@@ -80,7 +80,7 @@ for i = 1 : length(sub)
             
             case 'spectSeriesPlot'
                 
-                %     obj.spectSeriesPlot( s );
+                
                 
             otherwise
                 
@@ -96,7 +96,7 @@ obj.sub = sub;
 
 obj.createResultsCsv(obj.sub, 'postcomps', 'mra');
 
-%  [csvfile, matfile] = o.createCsvFileName;
+
 
 mm( sprintf('CSV & mat file: %s\n', obj.htpcfg.csvfile));
 

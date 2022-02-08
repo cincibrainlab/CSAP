@@ -28,7 +28,7 @@ if info.db_present && info.otherfigh && femp(info, 'db_gui')
 
 	% pass cached topo
 	% ----------------
-	% eegDb(r).ICA.topo = getappdata(figh, 'topocache');
+	
 
 	% update h
 	h.db = eegDb;

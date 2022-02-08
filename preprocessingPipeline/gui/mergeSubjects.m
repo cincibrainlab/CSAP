@@ -32,7 +32,7 @@ for i = 1 : sub_number
     fprintf('File: %s \t Sub: %d\tPart: %d\tRaw:%s\n', ...
         sub(i).subj_basename,   str2double(sub(i).proc_merge.subId), ...
         str2double(sub(i).proc_merge.partId), filelist{i});
-    %str2double(sub(i).proc_merge.partId)
+    
     
 end
 

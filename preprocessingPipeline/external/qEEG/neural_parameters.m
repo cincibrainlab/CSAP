@@ -1,27 +1,19 @@
 %---------------------------------------------------------------------
 %% PREPROCESSING (lowpass filter and resample)
 %---------------------------------------------------------------------
-%LP_fc = 30;  % low-pass filter cut-off
-%Fs_new = 128; % down-sample to Fs_new (Hz)
+
 
 
 %---------------------------------------------------------------------
 %% DIRECTORIES
 %---------------------------------------------------------------------
 % FILL IN AS APPROPRIATE:
-% EEG_DATA_DIR = '';
-% EEG_DATA_DIR_MATFILES = '';
 
 
 %---------------------------------------------------------------------
 %% MONTAGE
 %---------------------------------------------------------------------
 % bipolar montage for NICU babies:
-% BI_MONT = {{'F4','C4'},{'F3','C3'},{'C4','T4'},{'C3','T3'},{'C4','Cz'},{'Cz','C3'}, ...
-%          {'C4','O2'},{'C3','O1'}};
-
-% or 
-% $$$ BI_MONT = {{'F4','C4'},{'F3','C3'}};
 
 
 %---------------------------------------------------------------------
@@ -51,32 +43,16 @@ ART_REF_LOW_CORR = 0.15; % if mean correlation coefficent across referential cha
 %          after filtering
 FILTER_REPLACE_ARTEFACTS = 'linear_interp';
 % 
-% feat_params_st.amplitude.FILTER_REPLACE_ARTEFACTS = FILTER_REPLACE_ARTEFACTS;
-% feat_params_st.rEEG.FILTER_REPLACE_ARTEFACTS = FILTER_REPLACE_ARTEFACTS;
-% feat_params_st.connectivity.FILTER_REPLACE_ARTEFACTS = FILTER_REPLACE_ARTEFACTS;
-% feat_params_st.FD.FILTER_REPLACE_ARTEFACTS = FILTER_REPLACE_ARTEFACTS;
 
 %---------------------------------------------------------------------
 %% FEATURES
 %---------------------------------------------------------------------
 % list of all features:
-% all_features_list;
-
-% or if just want a subset of features, set here:
-% $$$ FEATURE_SET_ALL = { ...
-% $$$     'spectral_relative_power' ...
-% $$$     ,'spectral_entropy' ...
-% $$$     ,'spectral_edge_frequency' ...
-% $$$     ,'amplitude_total_power' ...
-% $$$     ,'connectivity_coh_mean' ...
-% $$$                 };
 
 
 % band-pass filter in this band:
-% FREQ_BANDS = [0.5 4; 4 7; 7 13; 13 30]; 
 % 
 % % these bands often used for preterm infants (<32 weeks GA):
-% % $$$ FREQ_BANDS = [0.5 3; 3 8; 8 15; 15 30]; 
 % 
 % %---------------------------------------------------------------------
 % % A. spectral features
@@ -91,27 +67,14 @@ FILTER_REPLACE_ARTEFACTS = 'linear_interp';
 % % length of time-domain analysis window and overlap:
 % % (applies to 'spectral_power','spectral_relative_power',
 % %  'spectral_flatness', and 'spectral_diff' features)
-% feat_params_st.spectral.L_window = 2; % in seconds
-% feat_params_st.spectral.window_type = 'hamm'; % type of window
-% feat_params_st.spectral.overlap = 50; % overlap in percentage
-% feat_params_st.spectral.freq_bands = FREQ_BANDS;
-% feat_params_st.spectral.total_freq_bands = [FREQ_BANDS(1) FREQ_BANDS(end)];
-% feat_params_st.spectral.SEF = 0.95;  % spectral edge frequency
-% 
 % 
 % 
 % % fractal dimension (FD):
-% feat_params_st.FD.method = 'higuchi'; % method to estimate FD, either 'higuchi' or 'katz'
-% feat_params_st.FD.freq_bands = [FREQ_BANDS(1) FREQ_BANDS(end)];
-% % $$$ feat_params_st.FD.freq_bands = FREQ_BANDS;
-% feat_params_st.FD.qmax = 6;  % Higuchi method: max. value of k
-% 
+
 % %---------------------------------------------------------------------
 % % B. amplitude features
 % %---------------------------------------------------------------------
-% % $$$ feat_params_st.amplitude.freq_bands = [FREQ_BANDS(1) FREQ_BANDS(end)];
-% feat_params_st.amplitude.freq_bands = FREQ_BANDS;
-% 
+
 % % for rEEG (range-EEG, similar to aEEG) from [1]
 % %
 % % [1] D O’Reilly, MA Navakatikyan, M Filip, D Greene, & LJ Van Marter (2012). Peak-to-peak
@@ -119,12 +82,6 @@ FILTER_REPLACE_ARTEFACTS = 'linear_interp';
 % % 123(11), 2139–53.
 % %
 % % settings in [1]: window = 2 seconds; overlap = 0%; and no log-linear scale
-% feat_params_st.rEEG.L_window = 2; % in seconds
-% feat_params_st.rEEG.window_type = 'rect'; % type of window
-% feat_params_st.rEEG.overlap = 0; % overlap in percentage
-% feat_params_st.rEEG.APPLY_LOG_LINEAR_SCALE = 0; % use this scale (either 0 or 1)
-% feat_params_st.rEEG.freq_bands = FREQ_BANDS;
-% 
 % 
 % %---------------------------------------------------------------------
 % % C. connectivity features
@@ -133,13 +90,6 @@ FILTER_REPLACE_ARTEFACTS = 'linear_interp';
 % % 1) PSD: estimate power spectral density (e.g. Welch periodogram)
 % % 2) bartlett-PSD: Welch periodogram with 0% overlap and rectangular window
 % %    (necessary if using the analytic assessment of zero coherence, see below)
-% feat_params_st.connectivity.method = 'bartlett-PSD'; 
-% 
-% feat_params_st.connectivity.freq_bands = FREQ_BANDS;
-% feat_params_st.connectivity.L_window = 8; % PSD window in seconds
-% feat_params_st.connectivity.overlap = 75; % PSD window percentage overlap
-% feat_params_st.connectivity.window_type = 'hamm'; % PSD window type
-% 
 % 
 % 
 % % find lower coherence limit using either either a surrogate-data

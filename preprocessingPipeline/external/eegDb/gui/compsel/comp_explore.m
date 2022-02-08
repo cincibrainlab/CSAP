@@ -376,10 +376,7 @@ if h.opt.dipf.plot
     for tmpi = 1:length(h.EEG.dipfit.model)
         dips = findobj('parent', h.dipaxis, ...
             'tag', ['dipole' int2str(tmpi)]);
-        %         for d = 1:length(dips)
-        %         set(dips(d), 'visible', 'off');
-        %         end
-        %         clear d dips
+      
         set(dips, 'visible', 'off');
     end;
     clear tmpi
@@ -473,7 +470,7 @@ if sum(strcmp('compinfo', refr)) > 0
         compiyou = length(alltps);
     end
 
-    %set(h.compsubtype, 'String', alltps,'Value', compiyou);
+    
     set(h.compsubtype, 'String',alltps);
     set(h.compsubtype,'Value', compiyou);
 
@@ -797,7 +794,7 @@ if ~isempty(h.spct.freqsel)
     % get freqs:
     for fr = 1:2
         [~, freqadr(fr)] = min((abs(h.spect{h.comp}.freq - h.spct.freqsel(fr)))); %#ok<AGROW>
-        % frq(fr) = h.spect.freq(freqadr);
+        
     end
 
     % take average power in freq range across epochs
@@ -927,12 +924,7 @@ hs = gui_multiedit('ERPimage options', {'smoothing', 'filter frequency range'},.
     {num2str(h.opt.tri.smooth), ''});
 
 % change second option to checkbox
-% filtpos = get(hs.edit(2), 'Position');
-% delete(hs.edit(2));
-% hs.edit(2) = uicontrol('Style', 'checkbox',...
-%         'Units', 'pixels', 'Position', ...
-%         filtpos, 'String', '',...
-%         'FontSize', 12);
+
 set(hs.edit(2), 'Style', 'checkbox',...
     'Value', h.opt.tri.filt);
 

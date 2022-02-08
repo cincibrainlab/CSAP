@@ -35,7 +35,7 @@ function  s = tool_manualChanClean( obj, s )
 htpcfg = obj.htpcfg;
 opt = htpcfg.optnow;
 
-% Interpolation = opt.Stage2_Interpolation;
+
 ChanCleanThreshold = opt.Stage2_ChanCleanThreshold;
 CleanMode = char(opt.Stage2_CleanMode);
 EpochType = opt.Stage2_EpochType;
@@ -46,7 +46,7 @@ Merge = char(opt.Stage2_MergeFiles);
 %
 if htpcfg.autoprocflag == 1
     s.proc_badchans = s.proc_tmprej_chans;
-    %s.autoContClean;
+    
 else
     s.manualChanClean;
 end
@@ -138,7 +138,7 @@ if strcmp(EpochType, 'Event') == 1
     obj.msgout('\nManual Continuous Data Rejection: ', 'step_complete');
    
     if htpcfg.autoprocflag == 1
-       % s.autoContClean;
+       
     else
         s.manualContClean;
     end
@@ -149,15 +149,7 @@ if strcmp(EpochType, 'Event') == 1
     
 end
 
-%
-%     case 'asr'
-%
-%         htpcfg.asr_param = CleanRawDataClass.CleanRawDataInit;
-%         s.asrData( htpcfg.asr_param );
-%
-%      s.cleanData;
-% s.removeInterpolateChans;
-%end
+
 
 obj.msgout('\nManual Bad Channel Selection: ', 'step_complete');
 obj.msgout(sprintf('\nBad Channel IDs Removed (blank = none): %s\n', num2str(s.proc_badchans)), 'step_complete');

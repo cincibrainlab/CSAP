@@ -36,8 +36,7 @@ y=comb(draw_data.y);
 
 %NEW: compute unique Xs at the facet level (to avoid problems
 %with bar dodging width computation)
-%facet_x=comb(draw_data.facet_x);
-%uni_x=unique(facet_x);
+
 
 %NEW DODGING
 uni_x=unique(x);

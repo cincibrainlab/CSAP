@@ -11,15 +11,9 @@ function obj = populateDatatable( obj, stage )
                 return;
             else
                 
-%             
-%             [csvfile, matfile, pathdb] = obj.getStageCSV( stage_last, obj.htpcfg.basePath);
-%             objStageStatus = find(obj.selectObjects(stage_last, csvfile)); % current stage
-%             objStageStatus_completed = find(obj.selectObjects(stage_next, csvfile)); % completed
-%             
-%             
+ 
             pathDb = obj.htpcfg.pathdb;
-            
-            %htpcfg2sub
+
             
             % Load subject objects
             load(obj.htpcfg.matfile, 'sub');
@@ -32,9 +26,8 @@ function obj = populateDatatable( obj, stage )
             
             % update bad files
             totalIdx = {sub.proc_state};
-          %  badIdx = obj.selectObjects(stage_last, csvfile);
+ 
             
-            %[sub(~badIdx).proc_state] = deal('BAD');
             for i = 1:length(sub), sub(i).outputRow(stage_last); end
             
    

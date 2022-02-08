@@ -51,7 +51,7 @@ classdef CleanRawDataClass
         %segments
         function EEG = cleanRawData( EEG, param )
             
-            %EEG = clean_rawdata(EEG, 5, -1, 0.85, 4, 20, 0.25);
+            
             
             chan_w_locs = length(find([EEG.chanlocs(:).X]));
             

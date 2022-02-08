@@ -384,7 +384,7 @@ if (data_present)
     % Make sure we have read exactly the right amount of data.
     bytes_remaining = filesize - ftell(fid);
     if (bytes_remaining ~= 0)
-        %error('Error: End of file not reached.');
+        
     end
 
 end
@@ -458,77 +458,10 @@ if (data_present)
 
 end
 
-% Move variables to base workspace.
 
-% % new for version 2.01: move filename info to base workspace
-% filename = file;
-% move_to_base_workspace(filename);
-% move_to_base_workspace(path);
-% 
-% move_to_base_workspace(notes);
-% move_to_base_workspace(frequency_parameters);
-% if (data_file_main_version_number > 1)
-%     move_to_base_workspace(reference_channel);
-% end
-% 
-% if (num_amplifier_channels > 0)
-%     move_to_base_workspace(amplifier_channels);
-%     if (data_present)
-%         move_to_base_workspace(amplifier_data);
-%         move_to_base_workspace(t_amplifier);
-%     end
-%     move_to_base_workspace(spike_triggers);
-% end
-% if (num_aux_input_channels > 0)
-%     move_to_base_workspace(aux_input_channels);
-%     if (data_present)
-%         move_to_base_workspace(aux_input_data);
-%         move_to_base_workspace(t_aux_input);
-%     end
-% end
-% if (num_supply_voltage_channels > 0)
-%     move_to_base_workspace(supply_voltage_channels);
-%     if (data_present)
-%         move_to_base_workspace(supply_voltage_data);
-%         move_to_base_workspace(t_supply_voltage);
-%     end
-% end
-% if (num_board_adc_channels > 0)
-%     move_to_base_workspace(board_adc_channels);
-%     if (data_present)
-%         move_to_base_workspace(board_adc_data);
-%         move_to_base_workspace(t_board_adc);
-%     end
-% end
-% if (num_board_dig_in_channels > 0)
-%     move_to_base_workspace(board_dig_in_channels);
-%     if (data_present)
-%         move_to_base_workspace(board_dig_in_data);
-%         move_to_base_workspace(t_dig);
-%     end
-% end
-% if (num_board_dig_out_channels > 0)
-%     move_to_base_workspace(board_dig_out_channels);
-%     if (data_present)
-%         move_to_base_workspace(board_dig_out_data);
-%         move_to_base_workspace(t_dig);
-%     end
-% end
-% if (num_temp_sensor_channels > 0)
-%     if (data_present)
-%         move_to_base_workspace(temp_sensor_data);
-%         move_to_base_workspace(t_temp_sensor);
-%     end
-% end
 
 fprintf(1, 'Done!  Elapsed time: %0.1f seconds\n', toc);
-% if (data_present)
-%     fprintf(1, 'Extracted data are now available in the MATLAB workspace.\n');
-% else
-%     fprintf(1, 'Extracted waveform information is now available in the MATLAB workspace.\n');
-% end
-% fprintf(1, 'Type ''whos'' to see variables.\n');
-% fprintf(1, '\n');
+
 
 return
 

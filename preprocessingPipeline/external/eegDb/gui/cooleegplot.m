@@ -198,7 +198,7 @@ end
 
 % changing elec
 if length(opt.elec) ~= EEG.nbchan
-    % EEG.nbchan = length(elec);
+    
 end
 
 % if badchan not provided

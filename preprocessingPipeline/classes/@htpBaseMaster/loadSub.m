@@ -43,8 +43,7 @@ switch mode
     
     case 'FullAuto'
      try
-       % obj.htpcfg.csvfile = obj.htpcfg.fullauto.csvfile;
-       % obj.htpcfg.matfile = obj.htpcfg.fullauto.matfile;
+       
         obj.getStageCSV( stage_last, obj.htpcfg.basePath );
      catch
          obj.getStageCSV( stage_last, obj.htpcfg.basePath );

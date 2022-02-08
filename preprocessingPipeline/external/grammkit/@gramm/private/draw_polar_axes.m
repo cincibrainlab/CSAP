@@ -42,8 +42,7 @@ pol_handles=[];
 hold(cax, 'on');
 
 % ensure that Inf values don't enter into the limit calculation.
-%         arho = abs(rho(:));
-%         maxrho = max(arho(arho ~= Inf));
+
 hhh = line([-maxrho, -maxrho, maxrho, maxrho], [-maxrho, maxrho, maxrho, -maxrho], 'Parent', cax);
 set(cax, 'DataAspectRatio', [1, 1, 1], 'PlotBoxAspectRatioMode', 'auto');
 v = [get(cax, 'XLim') get(cax, 'YLim')];

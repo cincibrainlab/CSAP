@@ -16,15 +16,6 @@ else
 end
 
 
-% if nargin > 1
-%     inp = {'text'};
-%     tovar = {'txtstr'};
-%     
-%     for i = 1:length(inp)
-%         ind = find(strcmp(inp{i}, varargin));
-%         eval([tovar{ind}, ' = varargin{', num2str(ind + 1), '};']);
-%     end
-% end
 
 wh = 200;
 wb = 250;

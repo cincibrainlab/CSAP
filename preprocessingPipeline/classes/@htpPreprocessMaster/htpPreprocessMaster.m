@@ -203,15 +203,7 @@ classdef htpPreprocessMaster < handle & htpBaseMaster
         
         %CURRENTLY UNUTILIZED
         function obj = setOpt_Stage1( obj, mat )
-            %             lowcutoff: {'0.5'  '1'  '1.5'  '2'}
-            %             highcutoff: {'30'  '40'  '80'  '100'  '120'}
-            %             notch: {'57 63 3330'}
-            %             resample: {'250'  '500'  '100'  '1000'}
-            %             epochlength: {'2'  '1'  'Custom'}
-            %             cleanmode: {'Manual'  'ASR'}
-            %             pcacomps: {'Data Rank'  'K-Number'  '24'}
-            %             brainonly: {'Manual'  'Brain Only'  'Muscle Only'  'Eye Movement'  'Cardiac'}
-            %             plots: {'Off'  'Minimal'  'Maximum'}
+            
             
             obj.htpcfg.optnow_s1.mat = mat;
             
@@ -357,18 +349,9 @@ classdef htpPreprocessMaster < handle & htpBaseMaster
         
         %CURRENTLY UNUTILIZED
         function obj = setOptionsStage1( obj, choices )
-            %             lowcutoff: {'0.5'  '1'  '1.5'  '2'}
-            %             highcutoff: {'30'  '40'  '80'  '100'  '120'}
-            %             notch: {'57 63 3330'}
-            %             resample: {'250'  '500'  '100'  '1000'}
-            %             epochlength: {'2'  '1' }
-            %             cleanmode: {'Manual'  'ASR'}
-            %             pcacomps: {'Data Rank'  'K-Number'  '24'}
-            %             brainonly: {'Manual'  'Brain Only'  'Muscle Only'  'Eye Movement'  'Cardiac'}
-            %             plots: {'Off'  'Minimal'  'Maximum'}
-            %
+            
             optlist = obj.htpcfg.opt;
-            %     choices = [4,3,1,1,1,1,3,1,1,1];
+            
             
             optnames = fields(optlist);
             
@@ -390,18 +373,9 @@ classdef htpPreprocessMaster < handle & htpBaseMaster
         
         %CURRENTLY UNUTILIZED
         function obj = setOptionsStage2( obj, choices )
-            %             lowcutoff: {'0.5'  '1'  '1.5'  '2'}
-            %             highcutoff: {'30'  '40'  '80'  '100'  '120'}
-            %             notch: {'57 63 3330'}
-            %             resample: {'250'  '500'  '100'  '1000'}
-            %             epochlength: {'2'  '1' }
-            %             cleanmode: {'Manual'  'ASR'}
-            %             pcacomps: {'Data Rank'  'K-Number'  '24'}
-            %             brainonly: {'Manual'  'Brain Only'  'Muscle Only'  'Eye Movement'  'Cardiac'}
-            %             plots: {'Off'  'Minimal'  'Maximum'}
-            %
+            
             optlist = obj.htpcfg.opt;
-            %     choices = [4,3,1,1,1,1,3,1,1,1];
+            
             
             optnames = fields(optlist);
             

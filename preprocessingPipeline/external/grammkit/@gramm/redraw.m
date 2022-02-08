@@ -98,7 +98,7 @@ if isempty(obj.redraw_cache) %Takes a long time so we only do it once
     %Needed for the rest to work
     set(obj.title_text_handle,'Unit','normalized');
     set(obj.facet_text_handles,'Unit','normalized');
-    %set(obj.legend_text_handles,'Unit','normalized');
+    
     first_redraw=true;
 else
     first_redraw=false;
@@ -129,7 +129,7 @@ if display
         parent_axe=ancestor(text_handles(t),'axes');
         axpos=get(parent_axe,'Position');
         txtpos=get(text_handles(t),'Extent');
-        %rectangle('Position',[txtpos(1)+axpos(1) txtpos(2)+axpos(2) txtpos(3) txtpos(4)],'EdgeColor','g');
+        
         rectangle('Position',[txtpos(1)*axpos(3)+axpos(1) txtpos(2)*axpos(4)+axpos(2) txtpos(3)*axpos(3) txtpos(4)*axpos(4)],'EdgeColor','g');
     end
     set(obj.legend_text_handles,'Unit','data');
@@ -183,7 +183,7 @@ if ~isempty(obj.title_axe_handle)
     max_text_y=title_pos(2)+title_pos(4)*title_text_pos(2)+title_pos(4)*title_text_pos(4);
     switch obj.layout_options.title_centering
         case 'axes'
-            %title_pos = [obj.multi.orig(2) title_pos(2)+obj.multi.orig(1)+obj.multi.size(1)-spacing_h-max_text_y legend_pos(1)-obj.multi.orig(2) title_pos(4)];
+            
             tmp = vertcat(facet_pos{:});
             title_pos = [min(tmp(:,1)) title_pos(2)+obj.multi.orig(1)+obj.multi.size(1)-spacing_h-max_text_y legend_pos(1)-min(tmp(:,1))-spacing_w title_pos(4)];
         case 'plot'
@@ -219,7 +219,7 @@ if first_redraw || ~isfield(obj.redraw_cache,'max_facet_ind')
 
 if ~isempty(facet_text_pos)
     %Get positions of the corresponding parent axes
-    %axe_text_pos=get(cell2mat(ancestor(findobj(obj.facet_axes_handles,'Type','text'),'axes')),'Position');
+    
     %%didn't work with HG2 graphics
     if first_redraw
         temp_handles=ancestor(obj.facet_text_handles,'axes');
@@ -300,7 +300,7 @@ if ~isempty(obj.title_axe_handle)
     title_text_pos=get(obj.title_text_handle,'Extent');
     title_pos=get(obj.title_axe_handle,'Position');
     temp_available_y=title_pos(2)+title_pos(4)*title_text_pos(2);
-    %temp_available_y=tmp(2);
+    
 end
 %For the available room on top we take in account multi as well
 max_available_y=temp_available_y-spacing_h-(max_facet_y_text-max_facet_y);
@@ -316,15 +316,7 @@ if obj.force_ticks || (obj.wrap_ncols>0)% && ~isempty(strfind(obj.facet_scale,'f
     top_right_inset=get(obj.facet_axes_handles(1,end),'TightInset');
     facet_spacing_w=top_right_inset(1)+facet_spacing_w;
     facet_spacing_h=top_right_inset(2)+facet_spacing_h;
-    %             else
-    %                 %Compute additional spacing for titles if column wrap (this
-    %                 %is in the else to prevent too large increase of spacing in
-    %                 % facet_wrap
-    %                 if obj.wrap_ncols>0
-    %                     outerpos=get(obj.facet_axes_handles(1,1),'OuterPosition');
-    %                     innerpos=get(obj.facet_axes_handles(1,1),'Position');
-    %                     facet_spacing_h=facet_spacing_h+(outerpos(4)-innerpos(4)-(innerpos(2)-outerpos(2)))*1.5;
-    %                 end
+    
 end
 
 
@@ -340,7 +332,7 @@ if obj.wrap_ncols>0
     for r=1:nr
         for c=1:nc
             if ind<=length(obj.facet_axes_handles)
-                %axpos=get(obj.facet_axes_handles(ind),'Position');
+                
                 set(obj.facet_axes_handles(ind),'Position',[min_facet_x+(neww+facet_spacing_w)*(c-1) min_facet_y+(newh+facet_spacing_h)*(nr-r) neww newh]);
             end
             ind=ind+1;
@@ -350,15 +342,7 @@ else
     nr=size(obj.facet_axes_handles,1);
     nc=size(obj.facet_axes_handles,2);
     %OLD
-    %                 %We don't let those go below a small value (spacing)
-    %                 neww=max((max_available_x-min_facet_x-facet_spacing_w*(nc-1))/nc,facet_spacing_w);
-    %                 newh=max((max_available_y-min_facet_y-facet_spacing_h*(nr-1))/nr,facet_spacing_h);
-    %                 for r=1:nr
-    %                     for c=1:nc
-    %                         %axpos=get(obj.facet_axes_handles(r,c),'Position');
-    %                         set(obj.facet_axes_handles(r,c),'Position',[min_facet_x+(neww+facet_spacing_w)*(c-1) min_facet_y+(newh+facet_spacing_h)*(nr-r) neww newh]);
-    %                     end
-    %                 end
+    
     
     %NEW
     %Available space for axes
@@ -450,7 +434,7 @@ if ~isempty(obj.title_axe_handle)
     switch obj.layout_options.title_centering
         case 'axes'
             tmp = vertcat(facet_pos{:});
-            %title_pos = [min(tmp(:,1)) title_pos(2)+obj.multi.orig(1)+obj.multi.size(1)-spacing_h-max_text_y legend_pos(1)-min(tmp(:,1))-spacing_w title_pos(4)];
+            
             title_pos = [tmp(1,1) title_pos(2)+obj.multi.orig(1)+obj.multi.size(1)-spacing_h-max_text_y tmp(end,1)+tmp(end,3)-tmp(1,1) title_pos(4)];
         case 'plot'
             title_pos = title_pos+[0 obj.multi.orig(1)+obj.multi.size(1)-spacing_h-max_text_y 0 0];
@@ -465,35 +449,15 @@ end
 L=length(obj.legend_text_handles);
 if L>1
     legend_ylim=get(obj.legend_axe_handle,'YLim');
-    %              legend_text_pos=get(obj.legend_text_handles,'Extent');
-    %              legend_text_pos=vertcat(legend_text_pos{:});
-    %              legend_height=nanmean(legend_text_pos(:,4));
-    %              legend_spacing=nanmean(legend_text_pos(1:end-1,2)-(legend_text_pos(2:end,2)+legend_text_pos(2:end,4)));
-    %              legend_top=legend_text_pos(1,2)+legend_text_pos(1,4);
-    %              legend_bottom=legend_text_pos(end,2);
     
     % We use the first and second legends to compute spacing,
     % first and last for top and bottom
     legend_text_pos=get(obj.legend_text_handles([1 end]),'Extent');
     legend_height=legend_text_pos{1}(4);
-    %legend_spacing=legend_text_pos{1}(2)-(legend_text_pos{2}(2)+legend_text_pos{2}(4));
+    
     legend_top=legend_text_pos{1}(2)+legend_text_pos{1}(4);
     legend_bottom=legend_text_pos{2}(2);
     
-    %disp(['height: ' num2str(legend_height) ' spacing: ' num2str(legend_spacing) ])
-    %Theoretical resizing
-    %ratio=(legend_top-legend_bottom)/(legend_ylim(2)-legend_ylim(1));
-    
-    %Future text height stays visually constant so scales inversely
-    %relative to limits
-    %height_in_mod=legend_height*ratio;
-    
-    %Future spacing gets adjsuted according to relative text
-    %size and number of text labels
-    %spacing_in_mod=((legend_top-legend_bottom)-(height_in_mod*L))/(L-1);
-    
-    %disp(['mod height: ' num2str(height_in_mod) ' mod spacing: ' num2str(spacing_in_mod) ])
-    %set(obj.legend_axe_handle,'YLim',[legend_bottom legend_top]);
     
     %Here we want future text height=future spacing so by
     %solving for ratio we get
@@ -517,5 +481,5 @@ if ~isempty(obj.redraw_fun)
     end
 end
 
-%inCallback = [];
+
 end

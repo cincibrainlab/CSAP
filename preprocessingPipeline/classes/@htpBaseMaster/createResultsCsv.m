@@ -42,7 +42,7 @@ else
 end
 
 msgout = @sub.msgout;
-%timetag2    = datestr(now,'yymmddHHMM');
+
 if strcmp(obj.htpcfg.chanNow.net_name,'EDFGENERIC')
     timetag2 = datestr(now, 'yymmddHHMMSS');
 else
@@ -110,13 +110,7 @@ else
     if strcmp('reprocess_', userdesc)
         pathdb = sub(1).pathdb;
         saveFN = [pathdb.analysis 'A' timetag2 '_subjTable_' userdesc desc '_AUTO'];
-        %
-        %                     [a,b,c] = fileparts(obj.htpcfg.csvfile);
-        %                     b = [b '_AUTO'];
-        %                     obj.htpcfg.csvfile = [a, b, c];
-        %                     pathdb = sub(1).pathdb;
-        %                     saveFN = fullfile(pathdb.analysis, b);
-        %
+        
         
     else
         
@@ -132,10 +126,7 @@ end
 subjHeader = regexprep(sub(1).log_subjHeader, '\.', '') ;
 
 
-%             for i = 1 : length(sub)
-%                 %sub(i).outputRow(outputrowstage);
-%                 subjTable(i,:) = cell2table(vertcat(sub(i).log_subjRow));
-%             end
+
 tcell = {sub.log_subjRow};
 
 for k = 1 : length(tcell)
@@ -165,7 +156,7 @@ try
 catch
     obj.msgout(sprintf('If writetable error, type ''which strjoin'' to check for conflict.\nMove MATLAB libraries to top of the path.'), 'step_error');
 end
-%objSaveFile = fullfile([saveFN '.mat']);
+
 objSaveFile = fullfile([saveFN '.mat']);
 obj.htpcfg.csvfile = csvfile;
 arrayfun(@( s ) s.unloadDataset, sub, 'UniformOutput',false );

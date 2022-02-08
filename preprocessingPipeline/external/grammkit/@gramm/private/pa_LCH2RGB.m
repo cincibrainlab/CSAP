@@ -44,14 +44,7 @@ b = sin(H*pi/180).*C;
 
 %% CIE-L*ab -> XYZ
 % https://en.wikipedia.org/wiki/Lab_color_space
-% Y	= (L+16)/116;
-% X	= Y+a/500;
-% Z	= Y-b/200;
-% XYZ = [X Y Z];
-% 
-% sel			= XYZ>6/29;
-% XYZ(sel)	= XYZ(sel).^3;
-% XYZ(~sel)	= (XYZ(~sel)-4/29)*3*(6/29)^2;
+
 
 %% Different L*ab -> XYZ from http://www.brucelindbloom.com/index.html?Eqn_Lab_to_XYZ.html
 
@@ -114,10 +107,6 @@ end
 
 
 %% Final check
-% [I,J]			= find(RGB>1); %#ok<*NASGU>
-% RGB(I,:)		= repmat([1 1 1],numel(I),1);
-% [I,J]			= find(RGB<0);
-% RGB(I,:)		= repmat([1 1 1],numel(I),1);
 
 %% Clip values
 sel			= RGB>1;

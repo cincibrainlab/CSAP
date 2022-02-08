@@ -99,7 +99,7 @@ if setylim
             obj.plot_lim.maxx(obj.current_row,obj.current_column)=binranges(end)+nanmean(diff(binranges));
         end
         
-        %obj.firstrun(obj.current_row,obj.current_column)=0;
+        
         if strcmp(obj.aes_names.y,'y')
             obj.aes_names.y=params.normalization;
         end

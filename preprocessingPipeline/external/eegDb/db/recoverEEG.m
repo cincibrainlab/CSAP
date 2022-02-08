@@ -205,9 +205,7 @@ if ~loaded
     
     % make sure event types are in string format
     EEG = db_stringify_event_types(EEG);
-    
-    % EEG = pop_loadset('filename', db(r).filename, ...
-    %     'filepath', pth);
+    =
     
     % =====================
     % checking prefunctions

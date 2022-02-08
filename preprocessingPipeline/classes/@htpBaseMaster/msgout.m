@@ -44,8 +44,7 @@ obj.msg = str;
 switch msgtype
     
     case 'step_error'
-        %obj.lm(obj.msg);
-        %obj.htpcfg.logger.error('obj.msgout',sprintf('step_error: %s',obj.msg));
+        
         notify( obj, 'step_error' );
         obj.msgtype = 'Error';
         obj.msglog.err{end+1} = obj.msg;
@@ -75,6 +74,5 @@ switch msgtype
 end
 
 
-%obj.htpcfg.logger.info('obj.msgout',sprintf(' %s',obj.msg));
 
 end

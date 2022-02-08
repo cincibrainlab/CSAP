@@ -59,21 +59,17 @@ for m=1:length(files)
 
                      % window - 1s(srate), overlap - 50% (srate/2), F , Fs - srate 
 
-        %     figure;subplot(3,1,[1 2]);imagesc(freq,[],P');ylabel('1-sec segments 50% overlapping') 
-
+        
             P = mean(P,2); % averaging over windows 
 
-        %     subplot(3,1,3);plot(freq,P);axis tight;xlabel('Frequency (Hz)') 
-
-        %     saveas(gcf,['D:\Arc_Data\34\S01_FIGS\chan1_trial',num2str(i),'.png']);close 
-
+        
 
 
             %%% median frequency (quantile) from absolute power spectrum based on 
 
             %%% 16-sec epoch 
 
-            Pcum = cumsum(P); %figure;subplot(211);plot(freq,P);subplot(212);plot(freq,Pcum) 
+            Pcum = cumsum(P);  
 
             OverHalfIdx = find(Pcum>=Pcum(end)/2,1); 
 
@@ -166,8 +162,7 @@ for m=1:length(files)
         dbwpli_mat(chan1,chan2,:) = squeeze(mean(squeeze(dbwpli))); % 6chan x 6chan x 6band
     end;toc % 1.115 sec
 
-    %figure;for i=1:6;subplot(3,2,i);imagesc(squeeze(dbwpli_mat(:,:,i)));end
-
+    
     %Features for accessing later 
     %(abberiviations based upon template,variables, and the full feature names)
     featureAbbreviations = {'medianFreq','ent','flt','hfd'}; 

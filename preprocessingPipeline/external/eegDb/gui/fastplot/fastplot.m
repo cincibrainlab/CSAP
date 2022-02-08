@@ -309,7 +309,7 @@ classdef fastplot < handle
                     elem_order);
             end
             
-            % tic;
+            
             if refresh_elem(1)
                 % FIX chan_pos should be held in the obj
                 chan_pos = (1:obj.data_size(2))*obj.spacing;
@@ -336,8 +336,7 @@ classdef fastplot < handle
             if refresh_elem(3); obj.plot_epochlimits(); end;
             if refresh_elem(4); obj.plot_marks(); end;
             if refresh_elem(5); obj.plot_epoch_numbers(); end;
-            % timetaken = toc;
-            % fprintf('time taken: %f\n', timetaken);
+            
         end
         
         
@@ -396,8 +395,7 @@ classdef fastplot < handle
         function move_to_mark(obj, mark, whichone)
             % move view to specific (next/previous) mark
             %
-            % plt = fastplot(EEG)
-            % plt.move_to_mark('badchan', 'next')
+            
 
             % check mark
             if ~exist('mark', 'var') || isempty(mark)
@@ -532,7 +530,7 @@ classdef fastplot < handle
             if isstruct(varargin{1})
 
             % this will need some safty checks etc.
-            % previous_window = obj.window;
+            
             obj.window = varargin{1};
             % check number of epochs:
             epoch_length = length(obj.epoch.time);
@@ -921,7 +919,7 @@ classdef fastplot < handle
             % get epoch info:
             obj.opt.srate = EEG.srate;
             obj.opt.stime = 1000 / EEG.srate;
-            % obj.opt.halfsample = obj.opt.stime / 2;
+            
             if length(orig_size) > 2 && orig_size(3) > 1
                 obj.epoch.mode       = true;
                 obj.epoch.num        = orig_size(3);
@@ -1141,10 +1139,10 @@ classdef fastplot < handle
 
 
         function onButtonPress(obj)
-            % axesHandle  = get(objectHandle,'Parent');
+            
             coord = get(obj.h.ax, 'CurrentPoint');
             coord = coord(1, 1:2);
-            % fprintf('x: %1.2f, y: %1.2f\n', coord(1), coord(2));
+            
 
             % test where x is located relative to epoch.current_limits
             if obj.epoch.mode
@@ -1223,9 +1221,7 @@ classdef fastplot < handle
                             'LineWidth', 1);
                     else
                         obj.opt.badchan(clicked_chan) = true;
-%                         newcol = sum([...
-%                             obj.opt.ecol(clicked_chan, :) * 0.3; ...
-%                             [0.7, 0.7, 0.7] * 0.7], 1);
+
                         newcol = [1, 0, 0];
                         set(obj.h.lines(clicked_chan), 'color', newcol, ...
                             'LineWidth', 2);
@@ -1315,11 +1311,7 @@ classdef fastplot < handle
                 % TODO - the code below was nice, multimark should
                 %        go back to something similar
                 %
-                % vert = repmat(ylm([1, 1, 2, 2])', [1, newnum*2]);
-                % sel = [selected; selected + 1];
-                % x = reshape(epoch_lims(sel(:)), [2, numel(sel)/2]);
-                % vert(:,1:2:end) = [x; flipud(x)];
-                % vert = mat2cell(vert, 4, ones(newnum, 1) * 2)';
+               
 
                 % faces are always 1:4 so need to init
 

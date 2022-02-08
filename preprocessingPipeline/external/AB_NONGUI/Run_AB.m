@@ -9,37 +9,19 @@ AB_Parameters = Parameters
 
 
 
-%AB_Parameters.InData = eeg.data;
-%eeg.data = [];   % free memory
-
-%  N_elec = size(AB_Parameters.InData,1);     %number of electrodes
-%  N1 = 1;    % the last 5 electrodes do not have data
-%  N2 = N_elec - N1;   % the electrodes that will be cleaned by AB
 
 
 %Running AB
 
 fprintf('\n Running AB .....');
-%Z = AB_Parameters.InData(N2+1:N_elec,:);  % the last N1 electrodes
-%Dorsa:
-%Z=AB_Parameters.InData();
-%AB_Parameters.InData = AB_Parameters.InData(1:N2,:);    % removing the last N1 electrodes from the data
+
 
 AB_alg_window_GUI();  %Running AB
 
 fprintf('Done. \n')
-%AB_Parameters.OutData = [AB_Parameters.OutData; Z];  %Add the last N1 electrodes
-%Dorsa:
-%AB_Parameters.OutData = [AB_Parameters.OutData; Z];
-%AB_Parameters.InData = [AB_Parameters.InData; Z];
 
 %Writing the data to the output file
 
-% eeg.data = AB_Parameters.OutData;
-% disp(['Writing the clean data into the output file: (' AB_Parameters.OutputFile ') ...\n']);
-% write_eep_cnt(AB_Parameters.OutputFile, eeg);
-% fprintf('Done. \n')
-% clear eegp
 
 %=======================================================================
     function   AB_alg_window_GUI()

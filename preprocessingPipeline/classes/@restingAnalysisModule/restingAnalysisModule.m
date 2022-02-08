@@ -150,9 +150,7 @@ classdef restingAnalysisModule < handle
             ind = sort(amp_trans);
 % gpu conversion
             [ldensity,~] = ksdensity(amp_trans, ind, 'Bandwidth', Hx);
-%             [ldensity,~] = ksdensity(gather(amp_trans), gather(ind), 'Bandwidth', gather(Hx));
-%             figure;plot(ind,ldensity,'o-')
-%             xlabel('log(amplitude)');ylabel('density');
+
         end
 
 
@@ -160,21 +158,18 @@ classdef restingAnalysisModule < handle
             % circular density
             phase_replicates = [phase-2*pi phase phase+2*pi];
             circular = ksdensity(phase_replicates, sort(phase), 'Bandwidth', Hy);
-%             circular = ksdensity(gather(phase_replicates), gather(sort(phase)), 'Bandwidth', gather(Hy));
+
             circular_mod = 3*circular;
-%             figure;plot(sort(phase),circular_mod,'o-')
-%             xlabel('phase');ylabel('density');
+
         end
         
         
         function planar = planarKDE ( amp_trans1, amp_trans2, Hx, Hy )
             % planar density
             dat = [amp_trans1' amp_trans2']; % 2-column mat
-%             planar = ksdensity(gather(dat), gather(dat), 'Bandwidth', gather([Hx Hy])); 
+ 
             planar = ksdensity(dat, dat, 'Bandwidth', [Hx Hy]); 
-%             figure;scatter3(amp_trans1, amp_trans2, planar)
-%             xlabel('amplitude1');ylabel('amplitude2');zlabel('density');
-%             view(2)
+
         end
         
         
@@ -185,12 +180,10 @@ classdef restingAnalysisModule < handle
             phase_replicates = [phase-2*pi phase phase+2*pi]; 
             dat = [amp_replicates' phase_replicates']; % 2-column mat
             ind = [amp_trans' phase']; % 2-column mat
-%             cylindrical = ksdensity(gather(dat), gather(ind), 'Bandwidth', gather([Hx Hy])); 
+ 
             cylindrical = ksdensity(dat, ind, 'Bandwidth', [Hx Hy]); 
             cylindrical_mod = 3*cylindrical;
-%             figure;scatter3(amp_trans, phase, cylindrical_mod)
-%             xlabel('log(amplitude)');ylabel('phase');zlabel('density');
-%             view(2)
+
         end
         
         
@@ -202,9 +195,7 @@ classdef restingAnalysisModule < handle
             ind = [phase1' phase2']; % 2-column mat
             toroidal = ksdensity(dat, ind, 'Bandwidth', [Hx Hy]); 
             toroidal_mod = 9*toroidal;
-%             figure;scatter3(phase1, phase2, toroidal_mod)
-%             xlabel('phase1');ylabel('phase2');zlabel('density');
-%             view(2)
+
         end
               
         

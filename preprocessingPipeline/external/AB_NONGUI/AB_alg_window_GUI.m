@@ -66,7 +66,7 @@ if index == 1
 %     oldX = oldX';
     EEGdata = EEGdata';
 end
-% save (mat_file_name,'EEGdata');
+
 
 
 

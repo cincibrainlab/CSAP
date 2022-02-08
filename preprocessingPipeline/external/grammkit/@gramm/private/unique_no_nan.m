@@ -12,7 +12,7 @@ if old_matlab
 else
     y = unique(x,'stable'); %we keep the original order
 end
-%y = unique(x); %we keep the original order
+
 if ~iscell(x)
     y(isnan(y)) = []; % remove all nans
 else

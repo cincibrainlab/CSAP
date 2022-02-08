@@ -35,7 +35,7 @@ comby=comb(draw_data.y)';
 
 if sum(~isnan(combx))>2 && sum(~isnan(comby))>2 %numel(combx)>2 &&
     % Doesn't work in 2012b
-    %mdl=fitglm(combx,comby,'Distribution',params.distribution);
+    
     mdl = GeneralizedLinearModel.fit(combx,comby,'Distribution',params.distribution);
     if params.fullrange
         newx=linspace(obj.var_lim.minx,obj.var_lim.maxx,50)';
@@ -60,7 +60,7 @@ if sum(~isnan(combx))>2 && sum(~isnan(comby))>2 %numel(combx)>2 &&
     if params.disp_fit
         if obj.firstrun(obj.current_row,obj.current_column)
             obj.extra.mdltext(obj.current_row,obj.current_column)=0.05;
-            %obj.firstrun(obj.current_row,obj.current_column)=0;
+            
         else
             obj.extra.mdltext(obj.current_row,obj.current_column)=obj.extra.mdltext(obj.current_row,obj.current_column)+0.03;
         end

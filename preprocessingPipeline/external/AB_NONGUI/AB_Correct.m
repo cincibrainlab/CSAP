@@ -19,8 +19,7 @@ function [EEGdata,counter] = AB_Correct(X,threshold)
     Ryx = Y*X';
     
     lastwarn('');
-%     W = Ryx * inv(Rxx); % smoothing mat
-%     EEGdata = W * X; % smoothed output
+
     if sum(~isnan(Rxx))>=1
         W = Ryx * inv(Rxx); % smoothing mat
         EEGdata = W * X; % smoothed output

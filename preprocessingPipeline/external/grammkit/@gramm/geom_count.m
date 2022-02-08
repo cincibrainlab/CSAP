@@ -40,7 +40,7 @@ else
     
     hndl=scatter(C(:,1),C(:,2),counts*params.scale,draw_data.marker,'MarkerEdgeColor',edge,'MarkerFaceColor',face);
     
-    %hndl=my_point(obj,draw_data);
+    
 end
 
 obj.results.geom_count_handle{obj.result_ind,1}=hndl;

@@ -92,7 +92,7 @@ while i <= length(obj.sub)
         % unload data & decrease memory footprint
         s.unloadDataset;
         
-        %[flag, errorchk] = obj.redoOrContinue( s );
+        
         
         flag = 0;
         errorchk = 0;

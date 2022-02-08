@@ -20,14 +20,12 @@ switch action
             
         end
         
-       % arrayfun(@(x) x.htpcfg2sub , sub, 'UniformOutput',false );
+       
         obj.sub = arrayfun(@(x) x.outputRow(stage_last), sub);
         obj.createResultsCsv(obj.sub, stage_last, 'same');
         obj.dataTable = readtable(obj.htpcfg.csvfile);
         obj.sub = sub;
         
-        %obj.include_all_subjects('yes');
-        % arrayfun(@(x) x.exclude_subject( 'no' ), sub, 'UniformOutput',false );
         
     case 'save'
         
@@ -60,27 +58,9 @@ switch action
 end
 
 
-% %
-% %             [csvfile, matfile, pathdb] = obj.getStageCSV( stage_last, obj.htpcfg.basePath);
-% %             objStageStatus = find(obj.selectObjects(stage_last, csvfile)); % current stage
-% %             objStageStatus_completed = find(obj.selectObjects(stage_next, csvfile)); % completed
-% %  % csvtable = readtable(obj.htpcfg.csvfile);
-%
-%             % update bad files
-%             totalIdx = {sub.proc_state};
-%           %  badIdx = obj.selectObjects(stage_last, csvfile);
-%
-%             %[sub(~badIdx).proc_state] = deal('BAD');
-%
-%            % csvtable = readtable(obj.htpcfg.csvfile);
-%
-%             dataT = cell2table(vertcat(sub(:).log_subjRow));
-%             dataT.Properties.VariableNames = sub(1).log_subjHeader;
-%
-%             obj.dataTable = dataT;
-%
-%             obj.sub = sub;
 
-%            end
+
+
+
 
 end

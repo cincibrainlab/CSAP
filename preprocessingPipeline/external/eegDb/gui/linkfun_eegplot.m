@@ -12,10 +12,7 @@ if strcmp(plotopt.plotter, 'eegplot')
 	plotopt.badchan = h.db(h.r)...
 	    .chan.bad;
 
-	%     if ~femp(h, 'recovopts') || (femp(h, 'recovopts')...
-	%             && sum(strcmp('interp', h.recovopts)) == 0)
-	%     goodel(h.db(h.r).badchan) = [];
-	%     end
+	
 
 	% get rejections from cooleegplot
 	plotopts = struct_unroll(plotopt);

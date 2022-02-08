@@ -4,7 +4,7 @@ validFields = fields(o.ftcfg.freqFTdat);
 
 if any(strcmpi( varname, validFields ))
     o.ftcfg.dat.(varname) = [];
- %   o.ftcfg.Avail.(varname) = false;
+ 
     
 else
     o.msgout('Dataset field not found.', 'step_error');

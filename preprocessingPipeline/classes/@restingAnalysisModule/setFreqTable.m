@@ -39,9 +39,6 @@ function obj = setFreqTable( obj, newFreqMat )
 
     if nargin<2
         newFreqMat = [1,3; 4,7; 8,10; 10,12; 13,30; 30,80]; % human default P2
-%                 newFreqMat = [1,4; 4,10; 10,13; 13,30; 30,55; 65,100]; %
-%                 human modulation index
-%                 newFreqMat = [1,4; 4,8; 8,13; 13,30; 30,55; 65,100]; % mice
     end
 
 
@@ -50,7 +47,7 @@ function obj = setFreqTable( obj, newFreqMat )
     if newFreqMat(end,2) <= EEG.srate/2
         obj.freqTable = newFreqMat;
         obj.msgout('Frequency Table set', 'proc_msg');
-%                 disp(obj.freqTable);
+
     else
         cprintf('err', '\n\nERROR: Highest possible frequency lower than selected frequency band.\n');
         return

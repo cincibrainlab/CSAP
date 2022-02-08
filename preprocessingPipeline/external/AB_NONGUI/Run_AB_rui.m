@@ -9,8 +9,6 @@ function Parameters = Run_AB_rui(Parameters)
     [N,T] = size(AB_Parameters.InData);        
     numWarnings = 0;
     % removing DC offset (minor)
-    %AB_Parameters.InData = AB_Parameters.InData - ...
-        %mean(AB_Parameters.InData,2);
     
      AB_Parameters.InData = AB_Parameters.InData - ...
          nanmean(AB_Parameters.InData,2);
@@ -18,7 +16,7 @@ function Parameters = Run_AB_rui(Parameters)
     % AB denoising (high amplitude)
     if strcmp(AB_Parameters.Approach,'Total')
         AB_Parameters.OutData = AB_Correct( AB_Parameters.InData, threshold );
-%         [~,warnID] = lastwarn;
+
     elseif strcmp(AB_Parameters.Approach,'Window')
         LWind = min([T , AB_Parameters.WindowSize*AB_Parameters.Fs]);
         AB_Parameters.OutData = zeros(N,T);
@@ -48,9 +46,7 @@ function Parameters = Run_AB_rui(Parameters)
             % truncate out
             [AB_CorrectedData,countWarnings] = AB_Correct(Xwind,threshold);
             numWarnings = numWarnings + countWarnings;
-%             AB_Parameters.OutData(:,Iin:Ifin-1) = ...
-%                 AB_Parameters.OutData(:,Iin:Ifin-1) + ... % overlapping windows
-%                 AB_Correct(Xwind,threshold); % current window correction
+
             AB_Parameters.OutData(:,Iin:Ifin-1) = ...
                  AB_Parameters.OutData(:,Iin:Ifin-1) + AB_CorrectedData;
             

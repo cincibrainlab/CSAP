@@ -323,8 +323,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
         %preprocessing steps and further analysis steps due to being superclass of 
         %RestEegDataClass object.
         function o = eegDataClass()
-            %  if isempty(o.subj_basename)
-            %  o.subj_basename =[];
+            
             o.exclude_switch = false;
             o.exclude_comment = '';
             o.exclude_category = {'xml_placeholder'};
@@ -414,7 +413,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
         end
         
         function o = convertBipolarMontage( o )
-            %o.loadDataset('import');
+            
             EEG = o.EEG;
             % create pairs
             bipolarMontage = containers.Map({'Fp1','T3','C3','Cz','C4','O1'},...
@@ -585,24 +584,14 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             o.EEG = pop_select(o.EEG,'nochannel', nonOriginalElectrodes);
             o.EEG = eeg_checkset(o.EEG);
             o.EEG = eeg_checkchanlocs(o.EEG);
-%             data_SegmentSize = 300000;
-%             recording_MinuteSegments = find(mod(o.EEG.times,data_SegmentSize)==0);
-%             temp_times = NaN(1,size(o.EEG.times,2));
-%             temp_times(1:recording_MinuteSegments(3)) = o.EEG.times(1,1:recording_MinuteSegments(3));
-%             temp_times(recording_MinuteSegments(round(size(recording_MinuteSegments,2)/2)):recording_MinuteSegments(round(size(recording_MinuteSegments,2)/2)+2)) ...
-%                 = o.EEG.times(1,recording_MinuteSegments(round(size(recording_MinuteSegments,2)/2)):recording_MinuteSegments(round(size(recording_MinuteSegments,2)/2)+2));
-%             temp_times(recording_MinuteSegments(end-2):recording_MinuteSegments(end)) = o.EEG.times(1,recording_MinuteSegments(end-2):recording_MinuteSegments(end));
-%             o.EEG.data = o.EEG.data(:,~isnan(temp_times));
-%             o.EEG.times = o.EEG.times(~isnan(temp_times));
-%             clear temp_times;
-%             clear recording_MinuteSegments;
+
             o.EEG.data = double(o.EEG.data);
             o.EEG.pnts = size(o.EEG.data,2);
             o.net_nbchan_orig =  o.EEG.nbchan;
             o.proc_sRate_raw = o.EEG.srate;
             o.EEG = eeg_checkset(o.EEG);
             o.EEG = eeg_checkchanlocs(o.EEG);
-            %o.proc_xmax_raw = o.EEG.xmax/3;
+            
             o.net_nbchan_orig =  o.EEG.nbchan;
             o.proc_sRate_raw = o.EEG.srate;
             o.proc_xmax_raw = o.EEG.xmax;
@@ -616,10 +605,10 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             folder = o.pathdb.raw;
             file = fullfile(folder, subfolder, datafile);
             
-%             o.EEG = eeg_emptyset;
+
             
             o.EEG = pop_loadset('filename',datafile,'filepath',fullfile(folder,subfolder));
-            %o.EEG = pop_loadset(file);
+            
             o.EEG.filename = file;  
             o.EEG.etc.hourSegmentation = 2;
             o.EEG = eeg_checkset(o.EEG);
@@ -653,7 +642,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             end
             o.EEG.chaninfo.nosedir='+Y';
             o.EEG = pop_select(o.EEG,'nochannel', find(cellfun(@isempty,{o.EEG.chanlocs.radius})));
-            %nonOriginalElectrodes = find(ismember({o.EEG.chanlocs.labels},{'F3','F4','F7','F8','Fz','P3','P4','Pz','T5','T6','Fpz'}));
+            
             nonOriginalElectrodes = find(ismember({o.EEG.chanlocs.labels},{'F3','F4','F7','F8','Fz','P3','P4','Pz','T5','T6','Fpz', 'A1','A2'}));
             o.EEG = pop_select(o.EEG,'nochannel', nonOriginalElectrodes);
             o.EEG = eeg_checkset(o.EEG);
@@ -676,7 +665,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             o.proc_sRate_raw = o.EEG.srate;
             o.EEG = eeg_checkset(o.EEG);
             o.EEG = eeg_checkchanlocs(o.EEG);
-            %o.proc_xmax_raw = o.EEG.xmax/3;
+            
             o.net_nbchan_orig =  o.EEG.nbchan;
             o.proc_sRate_raw = o.EEG.srate;
             o.proc_xmax_raw = o.EEG.xmax;
@@ -754,7 +743,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 o.EEG = pop_biosig(srcfile);
                 o.EEG = eeg_checkset( o.EEG );
                 
-                %o.EEG = pop_chanedit(o.EEG, 'load',{o.net_file 'filetype' 'besa'});
+                
                 chanlocs = loadbvef('chanfiles/AS-64-X5_noREF.bvef');
                 chanlocs(find(strcmp('53',{chanlocs.labels}))) = [];
                 chanlocs(find(strcmp('GND',{chanlocs.labels}))) = [];
@@ -873,23 +862,8 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 EEG.chanlocs = chanlocs;
                 EEG = eeg_checkset( EEG );
                 
-                % clear chanlocs;
                 
-                %EEG = pop_select( EEG,'channel',{'17' '16' '15' '14' '19' '18' '13' '12' '21' '20' '11' ...
-                %    '10' '24' '23' '22' '9' '8' '7' '27' '26' '25' '6' '5' '4' '30' '29' '28' '3' '2' '1'});
                 
-                % based on the revised NN remap provided by Carrie Jonak
-                % (Channel remap.jpg)
-                
-                %EEG = pop_select( EEG,'channel',{'1','3','4','5','6','7','8','9','10', ...
-                %                     '11','12','13','14','15','16','17','18','19','20','21','22','23','24', ...
-                %                     '25','26','27','28','29','30','31'});
-                %
-                %
-                %                 '17' '16' '15' '14' '19' '18' '13' '12' '21' '20' '11' ...
-                %                     '10' '24' '23' '22' '9' '8' '7' '27' '26' '25' '6' '5' '4' '30' '29' '28' '3' '2' '1'});
-                %
-                %
                 swCHANNEL = 0;
                 swRESAMPLE  = 0;
                 EEG.filename = datafile;
@@ -921,7 +895,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 [signalStruct,timeRange,jsonData] = xdatImport(extractBefore(xdatfile,'_data'));
                 
                             
-                %EEG.data = double(signalStruct.PriSigs.signals);
+                
                 EEG.data = signalStruct.PriSigs.signals;
                 EEG.pnts = size(EEG.data,2);
                 EEG.nbchan = size(EEG.data,1);
@@ -932,7 +906,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 clear timeRange;
                 
                 EEG = eeg_checkset(EEG);
-                %EEG = eeg_checkchanlocs(EEG);
+                
                 EEG = pop_select( EEG, 'nochannel', [2,32]);
                 for i = 1 : EEG.nbchan
                     
@@ -949,7 +923,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 end
                 clear jsonData;
                 chanlocs(31) = [];
-                %EEG = pop_select( EEG, 'nochannel', [2,32]);
+                
                 for i = 1 : numel(chanlocs)
                 
                     EEG.chanlocs(i).theta       = chanlocs(i).theta;
@@ -1005,69 +979,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             this.msgout(str, 'proc_complete');
         end
         
-        %             % import raw data into eeglab format
-        %             % main import function for human data
-        %
-        %
-        %
-        %
-        %             %chanLocsTemplate = loadbvef(o.net_file);
-        %             %o.EEG = assignChanLocs( o.EEG, chanLocsTemplate, ...
-        %             %    o.proc_deleteMissingChans );
-        %
-        %             % create backup of original data
-        %             obj.EEG_raw = obj.EEG;
-        %
-        %             % -------- LOG -----------
-        %             % original channel number prior to cleaning
-        %             obj.net_nbchan_orig = obj.EEG.nbchan;
-        %             obj.proc_sRate_raw = obj.EEG.srate;
-        %             obj.proc_xmax_raw = obj.EEG.xmax;
-        %
-        %             if strcmp(obj.study_type,'chirp')
-        %
-        %                 if  obj.EEG.pnts == obj.events_pnts
-        %
-        %                     disp('EEG ERROR: Event DIG file is not same length as MEA Datafile');
-        %                     disp(['Data file: ' obj.filename.raw]);
-        %                     disp(['Event file: ' obj.filename.eventdata]);
-        %
-        %                     obj.EEG.event = obj.events_event;
-        %                     obj.EEG.uurevent = obj.events_urevent;
-        %
-        %                 end
-        %
-        %
-        %             end
         
-        %         end
-        
-        %         function obj = getChanEvents( obj )
-        %
-        %             % identify raw basename
-        %             [sub,basefile,~] = fileparts(obj.filename.raw);
-        %
-        %             % add 'dig.edf'
-        %             eventfile = fullfile(sub, [basefile ' dig.edf']);
-        %
-        %             % load data
-        %             EEG = pop_biosig(eventfile, 'channels',3,'importevent','off','importannot','off');
-        %
-        %             % extract events
-        %             EEG = pop_chanevent(EEG, 1,'edge','leading','edgelen',5, 'delchan', 'off');
-        %
-        %             % store data size
-        %             obj.events_pnts = EEG.pnts;
-        %
-        %             % store events in temp structure
-        %             obj.events_event = EEG.event;
-        %             obj.events_urevent = EEG.urevent;
-        %             % print basics
-        %             uniqueEvents = unique({EEG.event(:).type});
-        %             disp(['Unique Events:' uniqueEvents]);
-        %             % return
-        %
-        %         end
         
         %Use as:
         %       [ o ] = eeglab128to32(o)
@@ -1264,18 +1176,8 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             minphase    = param.minphase;
             usefft      = 0;
             
-            %               try
-            %                   if locutoff <= 2
-            %                       locutoff = locutoff / 2;
-            %                       filtorder = 1650;
-            %                   end
-            %               catch
-            %               end
-            %
-            %EEG = pop_eegfiltnew(EEG, configStr);
-            %             EEG  =  pop_eegfiltnew( EEG, locutoff ,hicutoff ,filtorder, revfilt, [], plotfreqz );
-            %EEG = ;
-            %EEG = pop_eegfiltnew(EEG,  locutoff,  hicutoff, filtorder,  revfilt, [], plotfreqz);
+            
+            
             try
                 switch revfilt  % correctly set reverse filtering for notch filter
                     case 0
@@ -1303,7 +1205,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
         %CURRENTLY UNUTILIZED
         function o = openInEEGLAB( o, EEG )
             
-            %EEG = o.EEG;
+            
             eeglab;
             assignin('base', 'EEG', EEG);
             eeglab redraw;
@@ -1334,7 +1236,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             o.proc_filt_bandlow = filtbound(1);              % filter settings
             o.proc_filt_bandhigh = filtbound(2);              % filter settings
             
-            %EEG = o.EEG;
+            
             
             nyquist = EEG.srate / 2; 
             
@@ -1484,7 +1386,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             
             obj.EEG.nbchan = obj.EEG.nbchan+1;
             obj.EEG.data(end+1,:) = zeros(1, obj.EEG.pnts);
-            %obj.EEG.chanlocs(1,obj.EEG.nbchan).labels = 'initialReference';
+            
             obj.EEG.chanlocs(obj.EEG.nbchan,1).labels = 'initialReference';
             is_edf = strcmp(obj.net_name, 'EDFGENERIC');
             
@@ -1533,7 +1435,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                     s={obj.EEG.event.type};
                     eventTypes=unique(s,'sorted');
                     obj.EEG = pop_epoch( obj.EEG, eventTypes,  obj.proc_contEpochLimits );
-                    %EEG = pop_epoch( EEG, All_STIM, vEPOCHERP, 'newname', 'Epochs', 'epochinfo', 'yes');
+                    
                     obj.EEG                         = eeg_checkset( obj.EEG );
                     
                     
@@ -1575,7 +1477,6 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             
             if strcmp(stage, 'error'), obj.proc_state = ['Error-' obj.proc_state]; end
             
-            %if strcmp(stage, 'postica'),obj.proc_state = 'PostICA';end
             
             propArr = properties(obj);
             
@@ -1725,7 +1626,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 
                 if rowidx == fidx('proc_timetag')
                     tmpArr{i} = strcat('D',num2str(tmpArr{i}));
-                    %tmpArr{i} = num2str(tmpArr{i});
+                    
                     
                 end
                 
@@ -1735,7 +1636,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                     catch
                         tmpArr{i} = logical(0);
                     end
-                    %tmpArr{i} = num2str(tmpArr{i});
+                    
                 end
                 
             end
@@ -1747,7 +1648,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                     
                     eventArr        = obj.eventcfg.details;
                     
-                    %log_subjHeader  = obj.log_subjHeader;
+                    
                     
                     for i = 2:size(eventArr,1)
                         
@@ -1821,7 +1722,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             
             
             % What is the results Excel template to use?
-            %[~,subid,~] = fileparts(o.EEG.filename);
+            
             subprefix = [o.subj_basename '_'];
             
             % define sampling rate
@@ -1891,7 +1792,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                     mat_pow(epochid,:,chanid)             = power;
                     
                     % calculate power band with matlab internal function
-                    %mat_pow2(epochid,:,chanid)            = bandpower(signal_hn,256,[0 128]);
+                    
                     
                     % Consider effects of detrending and hann window
                     signalX_nodt            = fft( signal, npnts ) ./ npnts;
@@ -1911,7 +1812,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                     
                     
                     % matrix of raw amplitudes
-                    % mat_signal(epochs, samples, channels)
+                    
                     mat_signal(epochid,:,chanid)          = signal;
                     mat_signal_dt(epochid,:,chanid)       = signal_dt;
                     mat_signal_hn(epochid,:,chanid)       = signal_hn;
@@ -2009,7 +1910,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             % write tables to file
             
             savefile = fullfile(o.pathdb.analysis,[subprefix '_s4_power.xls']);
-            % copyfile( templatefile, savefile );
+            
             
             writetable( abs_tb, savefile, 'sheet', 'abs_sum' );
             writetable( avg_tb, savefile, 'sheet', 'abs_avg' );
@@ -2064,9 +1965,6 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             o.removeData;
             
             
-            %
-            % savefile = fullfile([subprefix '_s4_pow_topo.png']);
-            % plot_stitch(subprefix, savefile, o.pathdb.analysis);
             
             
             
@@ -2455,7 +2353,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             if o.eventcfg.levelb ~= 1
                 ecfg.nowInterval = char(o.htpcfg.optnow.Stage2_EventLimits);
             else
-                %o.eventcfg.nowInterval_lvlB = o.eventcfg.nowInterval;
+                
                 ecfg.bLimits = char(o.htpcfg.optnow.Stage2_LevelBLimits);
             end
             
@@ -2491,7 +2389,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             catch
                 o.msgout('Variables already converted to matrixes.','proc_msg');
             end
-            %tmp = strsplit(o.eventcfg.nowInterval);
+            
             
             % remove duplicates
             if any(strcmp(nowTrigger, det(:,1)) == 1)
@@ -2526,7 +2424,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                         if strcmp(o.eventcfg.stage, 'B')
                             str = ['Working dataset: ' o.EEG.setname];
                             o.msgout(str,'msg_complete');
-                            %o.loadDataset_Event(1);
+                            
                         end
                     end
                     
@@ -2560,8 +2458,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 end
                 
                 EEGtemp = eeg_checkset( EEGtemp );
-                %    EEGtemp = pop_selectevent( EEGtemp, 'type', eventname,'deleteepochs','on', 'deleteevents', 'on');
-                %  EEGtemp = eeg_checkset( EEGtemp );
+                
                 o.storeDataset(EEGtemp, o.pathdb.postica, o.subj_subfolder, o.EEG.filename);
                 
                 o.filename.event{end+1} = o.EEG.filename;
@@ -2569,11 +2466,8 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 det{end, fidx('xmax')} = EEGtemp.trials * abs(EEGtemp.xmax-EEGtemp.xmin);
                 det{end, fidx('trials_og')} = length(EEGtemp.epoch);
                 
-                %         sub(i) = s;
-                %         sub(i).unloadDataset;
-                %
-                % s.createEpochsERP('FEEDBACK', [-0.2 0.75]);
-                %EEG = pop_epoch( EEG, {  'DI11'  'DIN1'  'DIN5'  }, [-1  2], 'newname', 'D0401_RLEEG2_import.set epochs', 'epochinfo', 'yes');
+                
+                
                 for i = 1 : length( o.EEG.epoch )
                     
                     o.EEG.epoch( i ).trialno = i;
@@ -2583,8 +2477,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             end
             
             o.eventcfg.details = det;
-            % det = cell2table(det);
-            % det.Properties.VariableNames = detvars;
+            
             
             o.epoch_length = 'Event';
             o.epoch_limits = 'Event';
@@ -2748,7 +2641,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 
                 info.EEG = o.EEG;
                 
-                % o.EEG = [];
+                
                 
                 o.unloadDataset;
                 
@@ -2838,9 +2731,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             
             fnArr = fields(o.filename);
             pathArr = fields(o.pathdb);
-%             if strcmp(o.EEG, '')
-%                 o.EEG = eeg_emptyset;
-%             end
+
             eegArr = fields(o.EEG);
             fnArr = cellfun(@(x) strcat('filename.', x), fnArr, 'UniformOutput', false);
             pathArr  = cellfun(@(x) strcat('pathdb.', x), pathArr, 'UniformOutput', false);
@@ -3173,8 +3064,6 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             
             
             data            = o.EEG.data(sensoridx,:,:);
-            %data = mean(EEG.data([28,24],:,:),1);
-            %data = mean(EEG.data([120,3,117,118,4,111],:,:),1);
             
             frames          = o.EEG.pnts;
             epochlim        = [-500 2000];
@@ -3190,7 +3079,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 'plotersp','on','plotitc','on','verbose','off',...
                 'baseline',NaN,'timesout',250);
             
-            %disp(n)
+            
             
             ITC1=(abs(itc))-rcrits(length(o.EEG.data(1,1,:)));
             
@@ -3332,7 +3221,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 ui_main.UserData.delchans = ui_selection;
                 htext.String = 'Manual Bad Channel Rejection: ';
                 htext.String = [htext.String num2str(ui_selection)];
-                %fprintf(htext.String);
+                
                 htext.BackgroundColor = [0 1 0];
                 o.proc_badchans = ui_selection;
             else
@@ -3344,9 +3233,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             
             
             
-            %display(boxBadChannels.String);
             
-            %ui_obj = get(gcf, 'Children');
         end
         
         %Upon completion of channel cleaning, the bad channels, if any, are
@@ -3366,7 +3253,6 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             if length(badchannels) >= 1
                 
                 
-                %EEGtemp = pop_select( EEG, 'nochannel', badchannels);
                 
                 
                 
@@ -3374,8 +3260,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 EEG.etc.dataRank = size(double(EEG.data'),2) - length(badchannels);
                 
                 
-                %EEG2 = pop_interp(EEGtemp,eeg_mergelocs(EEGtemp.chanlocs),'spherical');
-
+                
                 o.net_nbchan_post = EEG.etc.dataRank;
                 o.proc_ipchans = badchannels;
             else
@@ -3434,7 +3319,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
         %attributes
         function o = autoContClean( o )
             tmprej = o.htpcfg.autoproc.tmprej_cont;
-            %gui.position = [0.01 0.20 0.95 0.70];
+            
             srate_correction = o.htpcfg.autoproc.orig_srate / o.proc_sRate1;
             
             o.EEG = eeg_checkset(o.EEG);
@@ -3443,31 +3328,14 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             
             o.proc_removed_regions = [];
             
-            %             eegplot(o.EEG.data,'srate',o.EEG.srate,'winlength',8, ...
-            %                 'plottitle', ['Step 2/3: Continuous Artifact Rejection'  o.str_plottitle], ...
-            %                 'events',o.EEG.event,'wincolor',[1 0.5 0.5], ...
-            %                 'command','global rej,rej=TMPREJ',...
-            %                 'eloc_file',o.EEG.chanlocs);
             
             
-            %
-            %             handle = gcf;
-            %             handle.Units = 'normalized';
-            %             handle.Position = gui.position;
-            %
-            %             % Formatting Main EEGPLOT
-            %             h = findobj('tag', 'eegplottitle');
-            %             h.FontWeight = 'Bold'; h.FontSize = 16; h.Position = [0.5000 0.93 0];
-            %
-            %
-            %
-            %             waitfor(gcf);
             
             try
                 
                 if ~isempty(tmprej)
                     
-                    %tmprej = eegplot2event(rej, -1);
+                    
                     o.proc_tmprej_cont = tmprej;
                     [o.EEG,~] = eeg_eegrej( o.EEG,tmprej(:,[1 2]) ./ srate_correction );
                     
@@ -3487,7 +3355,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             o.proc_xmax_raw = o.EEG_prechan.trials * (o.EEG_prechan.xmax-o.EEG_prechan.xmin);
             o.proc_xmax_post = o.EEG.trials * (o.EEG.xmax-o.EEG.xmin);
             o.proc_xmax_percent =  (o.proc_xmax_post / o.proc_xmax_raw) * 100;
-            %o.proc_xmax_epoch
+            
             
             o.EEG = eeg_checkset(o.EEG);
             
@@ -3568,7 +3436,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             o.proc_xmax_raw = o.EEG_prechan.trials * (o.EEG_prechan.xmax-o.EEG_prechan.xmin);
             o.proc_xmax_post = o.EEG.trials * (o.EEG.xmax-o.EEG.xmin);
             o.proc_xmax_percent =  (o.proc_xmax_post / o.proc_xmax_raw) * 100;
-            %o.proc_xmax_epoch
+            
             
             o.EEG = eeg_checkset(o.EEG);
             
@@ -3747,7 +3615,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             
             
             
-            %EEG = eeg_rejsuperpose( EEG, 1, 1, 1, 1, 1, 1, 1, 1);
+            
             try
                 EEG = pop_rejepoch( EEG, tmprej ,0);
                 EEG = eeg_checkset(EEG);
@@ -3807,11 +3675,9 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 EEG.icaact = eeg_getdatact(EEG, 'component', [1:size(EEG.icaweights,1)]);
 
                 
-                %o.msgout(sprintf('\nComponents Removed: %s\n', num2str(o.proc_removeComps)), 'proc_msg');
                 
             catch
                 
-                %o.msgout(sprintf('\nError: Component Removal Incomplete.'), 'proc_msg');
                 
             end
             
@@ -3839,7 +3705,6 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
         %artifact group dependent upon the confidence threshold value.
         function comps_artifact = get_icview_comps( o, var, threshold, range )
             
-            % test = o.is_icview_valid();
             
             if isfield(o.EEG.etc, 'ic_classification')
             
@@ -3850,7 +3715,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             getCompIdx = @(x) find(strcmpi( x, o.EEG.etc.ic_classification.ICLabel.classes));
             getComps = @(x, y) find(o.EEG.etc.ic_classification.ICLabel.classifications(range, getCompIdx(x)) > y)';
             
-            %threshold = 0.75;
+            
             comps_artifact = getComps(var, threshold);
             
             
@@ -3859,7 +3724,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
         %CURRENTLY UNUTILIZED
         function o = sig_ispc( o )
             
-            %o.loadDataset('import');
+            
             
             o.sigCreateUniqueChanPairs;
             pairs = o.sigPairs;
@@ -4003,7 +3868,6 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             p = uipanel(h.tp,'Title','Component Selection Tool',...
                 'Position',[.40 .1 .55 .22]);
             
-            %strStatus = sprintf('(%d of %d): %s', i, length(sub), s.subj_basename);
             
             title = uicontrol(p,'Style','text',...
                 'String', strStatus,...
@@ -4038,21 +3902,19 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             UIButtonArr = findobj(h.tp, 'Type', 'UIControl');
             OriginalButtons = findobj(UIButtonArr, 'BackgroundColor', '[0.6600 0.7600 1]');
             for button_i = 1 : length(OriginalButtons), OriginalButtons(button_i).Visible = 'off'; end
-            % UI = findobj(UIButtonArr, 'String', 'OK');
             
-            % okbutton.Visible = 'off';
             
             % loop with comp number
             
             for ri = 1 : maxcomps
                 
                 chbutton = findobj('tag', ['comp' num2str(ri)], 'Parent', h.tp);
-                %disp(chbutton);
+                
                 chbutton.Callback = ['pop_prop_extended( s.EEG, 0,' num2str(ri) ')']';
                 
             end
             
-            %  delete(t2)
+            
             t2 = uicontrol(p,'Style','edit',...
                 'tag', 'comp_entry2', ...
                 'String','',...
@@ -4114,11 +3976,9 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             
             EEG = src.UserData.EEG;
             
-            % pop_prop( EEG , 0, str2num(comps.String), NaN, {'freqrange' [2 50] });
             
             pop_prop_extended( EEG, 0, str2num(comps.String));
             
-            %pop_selectcomps(src.UserData.EEG);
             
         end
         
@@ -4135,7 +3995,6 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             
             src.UserData.EEG = EEG;
             
-            %pop_selectcomps(src.UserData.EEG);
             
         end
         
@@ -4169,7 +4028,6 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             
             
             
-            % o.loadDataset('postcomps');
             
             o.compRemove;
             
@@ -4230,11 +4088,8 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 'coord_transform',dipfit.transform, ...
                 'chansel', dipfit.chansel);
             
-          %  EEG = pop_dipfit_settings( EEG, 'hdmfile','G:\\Dropbox\\bitbucket\\htp_dev\\source\\standard_vol.mat','coordformat','MNI','mrifile','G:\\Dropbox\\bitbucket\\htp_dev\\source\\standard_mri.mat','chanfile','G:\\Dropbox\\bitbucket\\htp_dev\\source\\std_129.elc','coord_transform',
-          %   ,'chansel',[1:128] );
-
-          %  EEG = pop_multifit(EEG, [1:108] ,'threshold',100,'rmout','on','dipoles',2,'dipplot','on','plotopt',{'normlen' 'on'});
-
+          
+          
             EEG = pop_multifit(EEG, dipfit.chansel ,'threshold',100,'plotopt',{'normlen' 'on'});
             EEG = eeg_checkset( EEG );
             
@@ -4394,7 +4249,6 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                     obj.htpcfg.logger.info('s.msgout',obj.msg);
             end
             
-            %obj.lm(obj.msg);
             
         end
         
@@ -4403,20 +4257,18 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
         %GUI output console for the user.
         function lm( obj, inputStr )
             
-            %obj.htpUF.turnOffWarnings;
             
             datetime.setDefaultFormats('default','MMddyy hh:mm');
             
             obj.outStr = inputStr;
            
-            %outStr = sprintf('%s\n%s (%s)\t%s' , obj.outStr, datetime, obj.msgtype, inputStr);
+            
             obj.outStr = sprintf('\n%s (%s)\t%s' ,  datetime, obj.msgtype, inputStr);
             
-            %obj.outStr = outStr;
             
             obj.htpcfg.logfile_id = fopen(fullfile(obj.htpcfg.scriptPath, 'local/logfiles/', obj.htpcfg.logfile),'a');
             fprintf(obj.htpcfg.logfile_id, regexprep(obj.outStr,'\','\\\\'));
-            %fprintf('%s',obj.outStr);
+            
             disp(obj.outStr)
             fclose(obj.htpcfg.logfile_id);
             
@@ -4433,7 +4285,6 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 
                 case 'Data Rank'
                     
-                    %rank_value = obj.proc_dataRank;
                     
                     if ~isempty(obj.proc_badchans)
                             rank_value = obj.net_nbchan_post;
@@ -4471,17 +4322,6 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             elc = adddir(o.htpcfg.chanNow.net_elcfile);
             coord = str2num(o.htpcfg.chanNow.net_coord_transform);
             
-            % check if dipfit is to be recalculated
-            %             if o.dipfit.calc == 1
-            %                 flag = 1;
-            %                 o.msgout('DIPFIT already calculated.','step_warning');
-            %             else
-            %                 flag = 0;
-            %             end
-            % calculations
-            %[ALLEEG EEG CURRENTSET ALLCOM] = eeglab;
-            %EEG = pop_loadset('filename','D3295_rest_postcomp.set','filepath','D:\\D128_good\\S04_POSTCOMP\\Group1\\');
-            %[ALLEEG, EEG, CURRENTSET] = eeg_store( ALLEEG, EEG, 0 );
             
             EEG = pop_dipfit_settings( EEG, 'hdmfile', hdm, 'coordformat','MNI', 'mrifile', mri, 'chanfile', elc, 'chansel',[1:length(o.EEG.chanlocs)]);
             EEG = pop_multifit(EEG, [1:length(o.EEG.chanlocs)] ,'threshold',100,'plotopt',{'normlen' 'on'});
@@ -4490,16 +4330,6 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             
             o.EEG = EEG;
             
-            %'C:\\Users\\ernie\\Dropbox\\bitbucket\\htp_dev\\source\\standard_vol.mat','coordformat','MNI','mrifile','C:\\Users\\ernie\\Dropbox\\bitbucket\\htp_dev\\source\\standard_mri.mat','chanfile','C:\\Users\\ernie\\Dropbox\\bitbucket\\htp_dev\\source\\std_129.elc','chansel',[1:128] );
-            
-            % [ALLEEG EEG] = eeg_store(ALLEEG, EEG, CURRENTSET);
-            %EEG = pop_multifit(EEG, [1:128] ,'threshold',100,'plotopt',{'normlen' 'on'});
-            %[ALLEEG EEG] = eeg_store(ALLEEG, EEG, CURRENTSET);
-            %pop_dipplot( EEG,[1:128] ,'mri','C:\\code\\eeglab\\plugins\\dipfit2.3\\standard_BEM\\standard_mri.mat','normlen','on');
-            %EEG = pop_dipfit_settings( EEG, 'hdmfile','C:\\Users\\ernie\\Dropbox\\bitbucket\\htp_dev\\source\\standard_vol.mat','coordformat','MNI','mrifile','C:\\Users\\ernie\\Dropbox\\bitbucket\\htp_dev\\source\\standard_mri.mat','chanfile','C:\\Users\\ernie\\Dropbox\\bitbucket\\htp_dev\\source\\std_129.elc','coord_transform',[2 -15 -4.8248 0.029714 -0.004076 -1.6124 11.5 12 11.9985] ,'chansel',[1:128] );
-            %[ALLEEG EEG] = eeg_store(ALLEEG, EEG, CURRENTSET);
-            %EEG = pop_multifit(EEG, [1:128] ,'threshold',100,'plotopt',{'normlen' 'on'});
-            %[ALLEEG EEG] = eeg_store(ALLEEG, EEG, CURRENTSET);
             
         end
         
@@ -4515,36 +4345,22 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
             o.removeInterpolateChans
             o.proc_ipchans=length(o.proc_badchans);
             o.proc_badchans = ['['  num2str(o.proc_badchans) ']'];
-            %o.proc_ipchans=length(o.proc_badchans);
+            
             is_arc = strcmp(o.net_name, 'ARCEDF');
             
             if ~is_arc
                 o.autobadsegments;
             else
-                %o.autobadsegmentspreterm;
+                
             end
             
             if ~is_arc
                 o.averageRefData;
             end
             
-            % stage 1 channel only
-            % o.htpcfg.asr_param = CleanRawDataClass.CleanRawDataInit;
-            % o.htpcfg.asr_param.arg_burst = -1;
-            % o.htpcfg.asr_param.arg_window = -1;
             
-            % o.asrData( o.htpcfg.asr_param );
-            % o.averageRefData;
             
-%             o.htpcfg.asr_param = CleanRawDataClass.CleanRawDataInit;
-%             o.htpcfg.asr_param.arg_channel = -1;
-%             o.htpcfg.asr_param.arg_flatline = -1;
-%             o.htpcfg.asr_param.arg_highpass = -1;
-%             o.htpcfg.asr_param.arg_noisy = -1;
-%             
-%             
-%             o.asrData( o.htpcfg.asr_param );
-            
+
             if ~is_arc
                 o.htpcfg.asr_param = CleanRawDataClass.CleanRawDataInit;
                 o.htpcfg.asr_param.arg_channel = -1;
@@ -4584,7 +4400,6 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 indelec = cell(1,length(measure));
                 com = cell(1,length(measure));
                 
-                %indelec{end+1} = o.find_zeroed_chans( EEG.data );
                 
                 for i = 1 : length(measure)
                     try
@@ -4605,7 +4420,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                     o.proc_state = 'CHANNEL';
                 end
                 
-                %o.EEG = EEG;
+                
             end
             
         end
@@ -4621,7 +4436,7 @@ classdef (ConstructOnLoad = true) eegDataClass < handle  & restingAnalysisModule
                 [OUTEEG, selectedregions, precompstruct, com] = pop_rejcont(o.EEG, 'elecrange',[1:o.EEG.nbchan] ,'freqlimit',[20 40] ...
                     ,'threshold',10,'epochlength',0.5,'contiguous',4, ...
                     'onlyreturnselection', 'on', 'addlength',0.25,'taper','hamming', 'verbose', 'on');
-                %OUTEEG = [];
+                
                 
                 winrej = selectedregions;
                 

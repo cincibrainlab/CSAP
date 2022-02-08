@@ -83,8 +83,7 @@ for j = 1 : length(stageNames)
             allopt = { allopt.Text};
             
         end
-       % newopt{i,1,j} = s1Fields{i};
-       % newopt{i,2,j} = allopt;
+       
         
         newStruct.(stageNames{j}).(s1Fields{i}) = allopt;
     end

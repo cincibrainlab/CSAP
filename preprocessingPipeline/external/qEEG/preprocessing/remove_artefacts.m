@@ -61,92 +61,14 @@ DBverbose=0;
 % 0. check in referential mode first; is there problem with one 
 %    channel (e.g. Cz)
 %---------------------------------------------------------------------
-% irem_channel=[];
-% if(~isempty(data_ref))
-%     x_filt=zeros(size(data_ref));
-%     for n=1:size(data_ref,1)
-%         x_filt(n,:)=filter_butterworth_withnans(data_ref(n,:),Fs,20,0.5,5);
-%     end
-% 
-%     
-%     r=corrcoef(x_filt');
-%     r(1:size(r,1)+1:end)=NaN;
-%     r_channel=nanmean(r);
-%     clear x_filt;
-% 
-%     ilow=find(abs(r_channel)<ART_REF_LOW_CORR);
-%     if(~isempty(ilow))
-%         nn=1; irem_channel=[];
-%         for n=ilow
-%             ch_find=upper(ch_refs{n});
-%             itmp=find(cellfun(@(x) ~isempty(strfind(x,ch_find)), upper(ch_labels)));
-%             
-%             irem_channel=[irem_channel itmp];
-%             nn=nn+1;
-%         end
-%         
-%         fprintf(':: remove channel (low ref. correlation): %s\n',ch_labels{irem_channel});
-%     end
-%     if(DBverbose)
-%         print_table(r_channel',{'corr'},ch_refs)    
-%     end
-%     data(irem_channel,:)=NaN;
-% end
-% 
-% ichannels=1:N_channels;
-% ichannels(irem_channel)=[];
-% N_channels=length(ichannels);
 
 
 %---------------------------------------------------------------------
 % 1. look for electrode coupling:
 %---------------------------------------------------------------------
-% A=[];
-% if(N_channels>4)
-%     [ileft,iright]=channel_hemispheres(ch_labels(ichannels));
-% 
-%     if(length(ileft)>1 && length(iright)>1)
-%         x_means=zeros(1,N_channels);
-% 
-%         x_filt=zeros(N_channels,N);
-%         for n=1:N_channels
-%             x_filt(n,:)=filter_butterworth_withnans(data(ichannels(n),:),Fs,20,0.5,5);
-%         end
-% 
-% 
-%         for n=1:N_channels
-%             x_means(n)=nanmean( abs( x_filt(n,:) ).^2 );
-%             
-%             A{n,1}=x_means(n);
-%             A{n,2}=ch_labels{ichannels(n)};
-%         end
-%         clear x_filt;
-% 
-%         % 1/4 of the median of channel energy:
-%         cut_off_left=median(x_means(ileft))/4;
-%         cut_off_right=median(x_means(iright))/4;
-% 
-% 
-%         ishort_left=find(x_means(ileft)<cut_off_left);
-%         ishort_right=find(x_means(iright)<cut_off_right);
-% 
-%         ishort=[ileft(ishort_left) iright(ishort_right)];
-%         ishort=ichannels(ishort);
-%         if(~isempty(ishort))
-%             fprintf(':: remove channel (electrode coupling): %s\n',ch_labels{ishort});
-%             data(ishort,:)=NaN;
-%             irem_channel=[irem_channel ishort];
-%         end
-%     end
-% end
-% 
-% if(DBverbose && ~isempty(A)),  print_table(A); end
-% 
-% 
-% 
+
 ichannels=1:size(data,1);
-% ichannels(irem_channel)=[];
-% N_channels=length(ichannels);
+
 
 
 
@@ -245,10 +167,7 @@ x_diff(x_diff~=0)=1;
 % if exactly constant for longer than . then remove:
 ielec=find(lens>=(params.ART_DIFF_MIN_TIME*Fs));
 timepoints(n).const_values_art = [istart(:),iend(:)];
-% $$$ if(~isempty(ielec))
-% $$$     fprintf(['channel: %s; flat voltage at time(s): ' repmat('%g ',1,length(ielec))  ...
-% $$$              ' \n'],bi_mont{n},istart(ielec)./Fs);
-% $$$ end
+
 for m=ielec
     irun=[(istart(m)-art_coll):(iend(m)+art_coll)];
     irun(irun<1)=1; irun(irun>=N)=N;
@@ -294,9 +213,6 @@ if(any(irem==1) && DBverbose)
     fprintf('length of sudden-jump artefacts: %.2f%%\n', ...
             100*length(find(irem==1))/length(x));
     
-% $$$     figure(22); clf; hold all;
-% $$$     plot(x); plot(xb);
-% $$$     disp('--- paused; hit key to continue ---'); pause;
 
 end
 

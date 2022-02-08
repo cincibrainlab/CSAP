@@ -50,16 +50,14 @@ for r = rs
     % no inds
     ind = [];
 
-    % checking fields
-    % fldch = db_checkfields(db, r, flds,...
-    %     'subfields', true, 'subignore', ignore);
+    
 
     if checksel
         % just scouting
-        % outsel = update_outsel(outsel, fldch, db, r); %#ok<UNRCH>
+        
     else
         %% applying rejections
-        %fldch = simplify_fldch(fldch);
+        
 
         if ~isempty(byname)
             mrknames = {db(r).marks.name};
@@ -122,21 +120,4 @@ for f = 1:length(outsel.fieldpres)
     end
 end
 
-% CHANGE - maybe a new fun for joining rejections?
-% function for joining inds
-% function ind = joinrej(ind, fld)
 
-% uni = unique(fld);
-% uni = uni(:);
-% logi = islogical(fld) || isequal(uni, [0; 1]) ...
-%     || isequal(uni, 0);
-
-% if logi
-%     fld = find(fld);
-% end
-
-% if isnumeric(fld)
-%     ind = union(ind, fld);
-% else
-%     return
-% end

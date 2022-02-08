@@ -267,13 +267,7 @@ if strcmp(obj.htpcfg.optnow.Stage2_CleanMode, 'Manual') || strcmp(obj.htpcfg.opt
                 break;
         end
 
-        % Code to verify or redo subject
-        %         if flag == 1  % do not increment "i" counter if redo
-        %
-        %         else
-        %             obj.sub(i) = s;  % apply changes to persistant object
-        %             i = i + 1;   % increment counter
-        %         end
+        
 
     end
 
@@ -304,7 +298,7 @@ if strcmp(obj.htpcfg.optnow.Stage2_CleanMode, 'ContCleanOnly')
                 
                 s.openDataset(obj.htpcfg.pathdb.import, s.subj_subfolder, s.filename.import);
 
-                %   s.trim_edges( 10 ); 
+                 
 
                 s = obj.tool_manualChanClean(s);
 
@@ -367,12 +361,7 @@ if strcmp(obj.htpcfg.optnow.Stage2_CleanMode, 'ContCleanOnly')
                 break;
         end
 
-        %         if flag == 1  % do not increment "i" counter if redo
-        %
-        %         else
-        %             obj.sub(i) = s;  % apply changes to persistant object
-        %             i = i + 1;   % increment counter
-        %         end
+        
     end
 end
 
@@ -385,7 +374,7 @@ mm(sprintf('Other Errors: %d', errorchk));
 
 if flag == 2, save_desc = 'in_progress'; else, save_desc = 'Default'; end
 
-%obj.createResultsCsv(obj.sub, stage_next, 'Default');
+
 obj.createResultsCsv(obj.sub, stage_next, save_desc);
 
 end

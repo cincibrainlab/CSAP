@@ -51,7 +51,7 @@ obj.plot_lim.maxx(obj.current_row,obj.current_column)=obj.var_lim.maxx+extra_x;
 obj.plot_lim.miny(obj.current_row,obj.current_column)=0;
 if obj.firstrun(obj.current_row,obj.current_column)
     obj.plot_lim.maxy(obj.current_row,obj.current_column)=max(f);
-    %obj.firstrun(obj.current_row,obj.current_column)=0;
+    
     obj.aes_names.y=[obj.aes_names.x ' ' params.function];
 else
     if max(f)>obj.plot_lim.maxy(obj.current_row,obj.current_column)

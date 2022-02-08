@@ -37,13 +37,13 @@ datetime.setDefaultFormats('default','MMddyy hh:mm');
 
 obj.outStr = inputStr;
 % log messages
-%outStr = sprintf('%s\n%s (%s)\t%s' , obj.outStr, datetime, obj.msgtype, inputStr);
+
 if strcmp('step_msg', obj.msgtype)
     obj.outStr = sprintf('\n\t\t%s' ,  inputStr);
 else
     obj.outStr = sprintf('\n%s (%s)\t%s' ,  datetime, obj.msgtype, inputStr);
 end
-%obj.outStr = outStr;
+
 try
     obj.htpcfg.logfile_id = fopen(fullfile(obj.htpcfg.scriptPath, 'local/logfiles/', obj.htpcfg.logfile),'a');
     fprintf(obj.htpcfg.logfile_id, obj.outStr);
@@ -52,7 +52,7 @@ try
     fclose(obj.htpcfg.logfile_id);
 catch
     fprintf('Check MATLAB working directory. No access to log files');
-    %error('Check MATLAB working directory. No access to log files');
+    
 end
 
 

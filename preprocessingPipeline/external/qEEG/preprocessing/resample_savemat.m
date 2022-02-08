@@ -102,9 +102,6 @@ else
         plot((1:size(data,2))./Fs,data');
     end    
     
-    % SPECIAL CASE FOR THE MOBERG DATA: reverse polarity of C4
-% $$$     ic4=find(strcmp(ch_labels,'C4'));
-% $$$     data(ic4,:)=-data(ic4,:);
 end
 
 

@@ -67,16 +67,6 @@ htpcfg.chaninfo = obj.xml_elec;
 
 obj.msgout(sprintf('Available Options from %s: Loaded.\n', obj.xmlfile_options ), 'step_complete');
 
-% htpcfg.opt.lowcutoff    = obj.xml_opt.Stage1.FilterLow;
-% htpcfg.opt.highcutoff   = obj.xml_opt.Stage1.FilterHigh;
-% htpcfg.opt.notch        = obj.xml_opt.Stage1.Notch1; %{'57 63 3330'};
-% htpcfg.opt.resample     = obj.xml_opt.Stage1.Resample;
-% htpcfg.opt.epochlength  = obj.xml_opt.Stage2.EpochLength;
-% htpcfg.opt.cleanmode    = obj.xml_opt.Stage2.CleanMode;
-% htpcfg.opt.pcacomps     = obj.xml_opt.Stage3.PCA;
-% htpcfg.opt.brainonly    = obj.xml_opt.Stage3.CompSelect;
-% htpcfg.opt.plots        = {'Off', 'Minimal', 'Maximum'};
-% htpcfg.opt.parforS1     = obj.xml_opt.Stage1.ParforS1;
 
 
 try

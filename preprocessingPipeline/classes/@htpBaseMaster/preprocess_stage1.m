@@ -210,12 +210,6 @@ if ~(strcmp(obj.htpcfg.chanNow.net_name, {'EDFGENERIC'}))
     s.unloadDataset;
 end
 
-% s.storeDataset( s.EEG, ...
-%             obj.htpcfg.pathdb.(stage_next), ...
-%             s.subj_subfolder, ...
-%             s.filename.( stage_next ) );
-        
-% s.unloadDataset;
 
 s.outputRow( stage_next );
 obj.update_htpcfg( s );
@@ -452,7 +446,7 @@ function edf_import(htpcfg,s,edf_SecondSub,edf_ThirdSub)
     s.subj_basename = [s.subj_basename '_D'];
     s.createFileNames;
     s.EEG.data = s.EEG.data(:,1:s.EEG.pnts/3);
-    %s.EEG.pnts = s.EEG.pnts/3;
+    
     s.EEG.pnts = size(s.EEG.data,2);
     s.EEG = eeg_checkset(s.EEG);
     s.outputRow('import');

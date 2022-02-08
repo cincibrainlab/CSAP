@@ -34,7 +34,7 @@ htpcfg = obj.htpcfg;
 opt = htpcfg.optnow;
 
 
-% Interpolation = opt.Stage2_Interpolation;
+
 CleanMode = char(opt.Stage2_CleanMode);
 EpochLength = str2double(opt.Stage2_EpochLength);
 EpochLimits = obj.calc_cont_EpochLimits;

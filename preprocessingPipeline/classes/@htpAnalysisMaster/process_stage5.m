@@ -7,7 +7,7 @@ mm('\nStarting Stage 5: Subject-Level Analysis (Level1)');
 stage_last = 'postcomps';
 stage_next = 'level1';
 
-%obj.sub = obj.loadSub( stage_last );
+
 opt     = obj.formatOptions;
 
 arrayfun(@( s ) s.setopt( opt ), obj.sub, 'uni', 0);

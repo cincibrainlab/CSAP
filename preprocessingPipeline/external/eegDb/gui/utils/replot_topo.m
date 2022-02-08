@@ -20,14 +20,7 @@ delete(killch);
 ommit_fields = {'Type', 'Parent', 'Annotation',...
     'BeingDeleted', 'XDataMode', 'Children'};
 
-% invalid in hggroup (not used yet):
-% hg_ommit = {'ContourMatrix', 'Fill', 'LabelSpacing',...
-% 	'LevelList', 'LevelListMode', 'LevelStep',...
-%     'LevelStepMode', 'LineColor', 'LineStyle',...
-%     'LineWidth', 'ShowText' , 'TextList', ...
-%     'TextListMode', 'TextStep', 'TextStepMode',...
-%     'XData', 'XDataMode', 'YData', 'YDataMode', ...
-%     'ZData', 'ZDataMode'}; %
+
 
 allcompN = [topocache.CompNum];
 gettopo = allcompN == compN;
@@ -50,13 +43,7 @@ for nump = start:-1:1
     % hggroup is encountered
     if strcmp(topo{nump,1}, 'hggroup')
         
-        % ommit some other fields:
-        % flds = setdiff(flds, hg_ommit);
         
-        % hggroup_children = hnd(cell2mat(topo(:,2)) ...
-        %     == nump);
-        % keyboard
-        % addcom = '''Children'', hggroup_children, ';
         continue
     end
     

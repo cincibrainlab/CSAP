@@ -86,7 +86,7 @@ switch type
                         aadpathifnotexist( [ p 'external' filesep dircontent{index} filesep 't200_FileAccess' ], 'sopen.m');
                         aadpathifnotexist( [ p 'external' filesep dircontent{index} filesep 't250_ArtifactPreProcessingQualityControl' ], 'regress_eog.m' );
                         aadpathifnotexist( [ p 'external' filesep dircontent{index} filesep 'doc' ], 'DecimalFactors.txt');
-                        % biosigflag = 1;
+                        
                     elseif exist([p 'external' filesep dircontent{index}]) == 7 %#ok<EXIST>
                         addpathifnotinlist([p 'external' filesep dircontent{index}]);
                     end;
@@ -129,14 +129,14 @@ if ~isempty(tmpp)
     tmpp = tmpp(1:end-length(functionname));
     if length(tmpp) > length(tmpnewpath), tmpp = tmpp(1:end-1); end; % remove trailing filesep
     if length(tmpp) > length(tmpnewpath), tmpp = tmpp(1:end-1); end; % remove trailing filesep
-    %disp([ tmpp '     |        ' tmpnewpath '(' num2str(~strcmpi(tmpnewpath, tmpp)) ')' ]);
+    
     if ~strcmpi(tmpnewpath, tmpp)
         warning('off', 'MATLAB:dispatcher:nameConflict');
         addpath(tmpnewpath);
         warning('on', 'MATLAB:dispatcher:nameConflict');
     end;
 else
-    %disp([ 'Adding new path ' tmpnewpath ]);
+    
     addpathifnotinlist(tmpnewpath);
 end;
 

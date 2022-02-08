@@ -21,15 +21,12 @@ function [finalFlatlinePoints,EEG] = findFlatlines(EEG,baseDir,binIndex,hourSegm
     end
     if ~isempty(finalFlatlinePoints) && (size(finalFlatlinePoints,1)>1 || ~(sum(find([finalFlatlinePoints(1,1)]==1)>0) && sum(find([finalFlatlinePoints(1,2)==(8*60*60*EEG.srate)])>0)))
         fig=figure('Name',['Bin_' num2str(binIndex) '_Cuts'],'units','normalized','outerposition',[0 0 1 1],'visible','off');
-        %plot(EEG.times/1000/60/60,mean(EEG.data./EEG.srate./60./60,1),'black')
         plot(EEG.times/1000/60/60,mean(EEG.data,1),'black')
         title('Cuts to be Made to Pre-Filtered EEG Data (Averaged Across Channel)')
         xlabel('Time (Hours)')
         ylabel('Amplitude (µV)')
-        %limitValue = max(max(mean(EEG.data./EEG.srate./60./60)))+.001;
         limitValue = max(max(abs(mean(EEG.data,1))));
         ylim([-limitValue,limitValue])
-        %ylim([-limitValue,limitValue])
         y_limits = ylim;
         for i=1:size(finalFlatlinePoints,1)
             vertices = [EEG.times(finalFlatlinePoints(i,1))/1000/60/60 y_limits(2); EEG.times(finalFlatlinePoints(i,1))/1000/60/60 y_limits(1); EEG.times(finalFlatlinePoints(i,2))/1000/60/60 y_limits(2); EEG.times(finalFlatlinePoints(i,2))/1000/60/60 y_limits(1);];
@@ -39,9 +36,7 @@ function [finalFlatlinePoints,EEG] = findFlatlines(EEG,baseDir,binIndex,hourSegm
             numberPointsToBeCut = numberPointsToBeCut + numel(finalFlatlinePoints(i,1):finalFlatlinePoints(i,2));
         end
         EEG.etc.percentageFlatline = double((numberPointsToBeCut/size(EEG.data,2))*100);
-        %EEG.etc.hourSegmentation = hourSegment;
         EEG.etc.flatlinePointRanges = {finalFlatlinePoints};
-        %EEG.etc.existingDataIndices = find(~isnan(EEG.data(:,:)));
         if ~exist(fullfile(baseDir,'Cut_Images'),'dir')
             mkdir(fullfile(baseDir,'Cut_Images'));
         end

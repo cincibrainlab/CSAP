@@ -31,10 +31,9 @@ end
 % which topos are uncached
 
 % This (below) should be done if compnum is empty etc.
-%if ~exist('compnum', 'var') || isempty(compnum)
+
     compnum = cellfun(@(x) str2num(regexp(x, '[0-9]+', ...
         'match', 'once')), tags); %#ok<ST2NM>
-%end
 
 if isempty(topocache)
     tocache = compnum;

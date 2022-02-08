@@ -110,9 +110,7 @@ switch params.geom
         
         
         
-        %patchesz=[Nr(sel) ; Nr(sel) ; Nr(sel) ; Nr(sel) ];
         
-        %p=patch(patchesx,patchesy,patchesz,Nr(sel));
         hndl=patch(patchesx,patchesy,Nr(sel));
         set(hndl,'edgeColor','none')
         
@@ -127,7 +125,7 @@ switch params.geom
         Y=reshape(Y,1,numel(Y));
         Nr=reshape(N',1,numel(N));
         sel=Nr>0;
-        %hndl=point_patch(X(sel),Y(sel),Nr(sel)*(C{1}(2)-C{1}(1))/30,draw_data.color,20,ratio);
+        
         hndl=scatter(X(sel),Y(sel),Nr(sel)*10,draw_data.marker,'MarkerEdgeColor',draw_data.color,'MarkerFaceColor','none');
 end
 

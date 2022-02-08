@@ -46,8 +46,7 @@ if length(selection_arr) == number_of_options
         
         opt.(fieldname_of_options{i})(selection_arr(i));
         optnow.(fieldname_of_options{i}) = opt.(fieldname_of_options{i})(selection_arr(i));
-      %  obj.msgout(sprintf('%25.25s: (%10s)(%2d) [%s]', fieldname_of_options{i}, opt.(fieldname_of_options{i}){selection_arr(i)}, selection_arr(i), strjoin(opt.(fieldname_of_options{i}))), 'step_msg');
-        
+      
     end
 else
     

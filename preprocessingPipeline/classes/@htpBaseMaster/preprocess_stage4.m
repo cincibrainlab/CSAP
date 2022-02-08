@@ -208,16 +208,10 @@ if flg == 2, save_desc = 'in_progress'; else, save_desc = 'Default'; end
 
 
 obj.createResultsCsv(obj.sub, 'postcomps', save_desc);
-%obj.createComponentCsv(obj.sub);
+
 mm( sprintf('CSV & mat file: %s\n', obj.htpcfg.csvfile));
 
-%obj.msgout(sprintf('Summary'));
-%obj.msgout(sprintf('\nFiles Processed: %d\n', length(objStageStatus)));
-%obj.msgout(sprintf('Previously Completed Files: %d\n', prev_files));
-%obj.msgout(sprintf('Skipped Files: %d\n', skip_files));
-%obj.msgout(sprintf('Other Errors: %d\n', errorchk));
 
-% obj.createResultsCsv(obj.sub, 'postcomps', 'Default');
 
 end
 

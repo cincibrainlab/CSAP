@@ -29,7 +29,7 @@ if iscell(draw_data.x)
     
     if strcmp(params.geom,'line')
         %Slow version
-        %line([temp_x(:) temp_x(:)]',[temp_y(:) temp_y(:)+1]','color',draw_data.color,'lineWidth',draw_data.size/4);
+        
         
         %Fast version
         allx=[temp_x(:) temp_x(:) temp_x(:)]';

@@ -60,11 +60,7 @@ h.tp = gcf;
 h.tp.Units = 'norm';
 h.tp.Position = [sc_width/200/sc_width .5 main_width main_height];
 
-%    h.tp.OuterPosition = [100 50 700 700];
 
-%  p = uipanel(h.tp,'Title','Component Selection Tool',...
-%     'Position',[.40 .1 .55 .22]);
-% test = figure;
 p = figure('Name','Component Selection Tool',...
     'Position',[800 300 400 200], ...
     'MenuBar', 'none');
@@ -81,7 +77,7 @@ title = uicontrol(p,'Style','text',...
     'HorizontalAlignment', 'left', ...
     'BackgroundColor', [1 1 1], 'ForegroundColor', [0 0 0], ...
     'Position',[0.05 0.8 0.9 0.15]);
-% delete(title)
+
 
 b1 = uicontrol(p,'Style','pushbutton','String','Save Components',...
     'Units','normalized',...
@@ -102,7 +98,7 @@ b2 = uicontrol(p,'Style','pushbutton','String','C. Detail',...
     'UserData', s, ...
     'Callback', @b2_callback, ...
     'Position',[.05 0.05 .20 .25]);
-%        delete(bguess)
+
 bguess = uicontrol(p,'Style','pushbutton','String','ICView Guess',...
     'Units','normalized',...
     'UserData', s, ...
@@ -111,7 +107,7 @@ bguess = uicontrol(p,'Style','pushbutton','String','ICView Guess',...
 
 
 excludeStatus = s.get_exclude_switch;
-% global excludeButton;
+
 excludeButton = uicontrol(p,'Style','pushbutton','String','Exclude Sub',...
     'Units','normalized',...
     'UserData', s, ...
@@ -136,23 +132,20 @@ closebtn = findobj('tag', 'Set thresholds', 'parent', h.tp);
 UIButtonArr = findobj(h.tp, 'Type', 'UIControl');
 OriginalButtons = findobj(UIButtonArr, 'BackgroundColor', '[0.6600 0.7600 1]');
 for button_i = 1 : length(OriginalButtons), OriginalButtons(button_i).Visible = 'off'; end
-% UI = findobj(UIButtonArr, 'String', 'OK');
 
-% okbutton.Visible = 'off';
 
 % loop with comp number
 
 for ri = 1 : maxcomps
     
     chbutton = findobj('tag', ['comp' num2str(ri)], 'Parent', h.tp);
-    %disp(chbutton);
+    
     chbutton.UserData = {s, ri};
     chbutton.Callback = @prop_extended;
-    %chbutton.Callback = ['pop_prop_extended( s.EEG, 0,' num2str(ri) ')']';
     
 end
 
-%  delete(t2)
+
 t2 = uicontrol(p,'Style','edit',...
     'tag', 'comp_entry2', ...
     'String','',...
@@ -227,7 +220,7 @@ allui = {p, h.tp, h.ep, ts.ep};
 
 for mi = 1 : length(allui)
     allui{mi}.Position(2) = allui{mi}.Position(2) * 1.20;
-    % allui{mi}.Position(1) = allui{mi}.Position(1) * 1.20;
+    
     allui{mi}.Tag = 'selectcomps';
 end
 
@@ -252,7 +245,7 @@ s.proc_state = 'postcomps';
         exstatus = s.get_exclude_switch;
         
         % get handle for button
-        % comps = findobj('tag', 'exbutton');
+        
         comps = src;
         % change button based on exstatus
         switch exstatus
@@ -284,7 +277,7 @@ s.proc_state = 'postcomps';
         
         
         threshold = 0.75;
-        %range = 1:24;
+        
         range = 1:maxcomps;
         
         get_ic = @(x) s.get_icview_comps(x, threshold, range);
@@ -312,11 +305,9 @@ s.proc_state = 'postcomps';
         
         EEG = src.UserData.EEG;
         
-        % pop_prop( EEG , 0, str2num(comps.String), NaN, {'freqrange' [2 50] });
         
         pop_prop_extended( EEG, 0, str2num(comps.String), NaN, {'freqrange', [0 55]});
         
-        %pop_selectcomps(src.UserData.EEG);
         
     end
 
@@ -336,7 +327,6 @@ s.proc_state = 'postcomps';
         
         src.UserData.EEG = EEG;
         
-        %pop_selectcomps(src.UserData.EEG);
         
     end
 
@@ -373,12 +363,6 @@ s.proc_state = 'postcomps';
         vis_h.Position(4) = 500;
         
        % vis_h.
-%        saveButton = uicontrol(vis_h, 'Style', 'pushbutton','String','Save Components',...
-%            'Units','normalized',...
-%            'UserData', s, ...
-%            'Callback',@b1_callback, ...
-%            'BackgroundColor', [0 1 0], ...
-%            'Position',[.6 0.05 .35 .25]);
 
 
        

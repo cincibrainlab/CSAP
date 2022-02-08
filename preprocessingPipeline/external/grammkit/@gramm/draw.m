@@ -688,7 +688,7 @@ if obj.updater.first_draw
     end
     hold on
     set(obj.legend_axe_handle,'Visible','off','NextPlot','add');
-    %set(obj.legend_axe_handle,'PlotBoxAspectRatio',[1 1 1]);
+    
 else
     axes(obj.legend_axe_handle)
 end
@@ -702,11 +702,8 @@ if obj.layout_options.legend
     % If the color groups are the same as marker, linestyle or size groups
     % then there will be a common legend (handled by the marker, linestyle
     % or size legend).
-    if length(str_uni_color)>1 && any(strcmp(obj.color_options.legend,{'separate','separate_gray'})) % && ...
-            %~(length(str_uni_color)==length(str_uni_marker) && all(strcmp(str_uni_color, str_uni_marker))) && ...
-            %~(length(str_uni_color)==length(str_uni_linestyle) && all(strcmp(str_uni_color, str_uni_linestyle))) && ...
-            %~(length(str_uni_color)==length(str_uni_size) && all(strcmp(str_uni_color, str_uni_size)))
-        
+    if length(str_uni_color)>1 && any(strcmp(obj.color_options.legend,{'separate','separate_gray'})) 
+            
         %Make a colormap with only the colors and no lightness
         color_legend_map=get_colormap(length(str_uni_color),1,obj.color_options);
         
@@ -835,10 +832,10 @@ end
 
 %Set size of legend axes
 set(obj.legend_axe_handle,'XLim',[1 8]);
-%xlim([1 8])
+
 if obj.legend_y<0
     set(obj.legend_axe_handle,'YLim',[obj.legend_y 1]);
-    %ylim([obj.legend_y 1])
+    
 end
 %set(obj.legend_axe_handle,'DataAspectRatio',[1 1 1]);
 
@@ -1184,7 +1181,7 @@ for ind_row=1:length(uni_row) %Loop over rows
         %Set ablines, hlines and vlines (after axe properties in case the limits
         %are changed there
         if obj.abline.on
-            %xl=get(ca,'xlim');
+            
             for line_ind=1:length(obj.abline.intercept)
                 tmp_xl=[obj.var_lim.minx obj.var_lim.maxx];
                 tmp_extent=(tmp_xl(2)-tmp_xl(1))*obj.abline.extent(line_ind)/2;
@@ -1195,7 +1192,7 @@ for ind_row=1:length(uni_row) %Loop over rows
                 else
                     if ~isnan(obj.abline.xintercept(line_ind))
                         %vline
-                        %yl=get(ca,'ylim');
+                        
                         if obj.var_lim.miny == obj.var_lim.maxy %We are probably in a case where y wasn't provided (histogram or raster)
                             tmp_yl=[0 numel(temp_aes.x)]; %We scale y according to number of x elements
                         else

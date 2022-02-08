@@ -2,8 +2,7 @@ function db_gui_upd_txt2(addinf, h)
 
 % NOHELPINFO
 
-% db_txt = {'filename: '; 'badchans: '; 'rejected comps: ';...
-%     'comments: '};
+
 ICAw_txt2 = {'all ifrej comps num: '; 'current comp: '; 'comps left: ';...
     'comps removed: '; 'comps spared: '};
 

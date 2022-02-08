@@ -156,8 +156,5 @@ function hndl=plotci(obj,x,y,yci,draw_data,geom,dodge,width)
                 
             end
             
-            %Adjust limits
-            %obj.plot_lim.maxx(obj.current_row,obj.current_column)=max(max(x),obj.plot_lim.maxx(obj.current_row,obj.current_column));
-            %obj.plot_lim.minx(obj.current_row,obj.current_column)=min(min(x),obj.plot_lim.minx(obj.current_row,obj.current_column));
-
+            
         end

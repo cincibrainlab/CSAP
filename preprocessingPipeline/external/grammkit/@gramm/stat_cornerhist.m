@@ -129,7 +129,7 @@ function cornerhist_redraw(parent_axe,child_axe,x_pos,aspect_ratio)
 
 %Get info about updated parent axis
 set(parent_axe,'Units','Pixels')
-%pa_pos=get(parent_axe,'Position');
+
 pa_pos=plotboxpos(parent_axe);
 pa_xlim=get(parent_axe,'XLim');
 pa_ylim=get(parent_axe,'YLim');

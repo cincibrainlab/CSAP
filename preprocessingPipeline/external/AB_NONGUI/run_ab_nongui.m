@@ -7,15 +7,14 @@ fprintf('\nIMPORTANT NOTE:If you have any channels of zeros only,mention them to
 
 %//////////
 % get some data, put FirstSamp to 1, LastSamp to datapoints, data in InData
-    %Parameters.FirstSamp = 1;
+    
     infile = 'C:\code\test\Random_Scripts\Arc\Test_Cooling\Output_Cooling_Files\Bin_1_Cooling.set';
     eegdata = read_eep_cnt(infile,1,2);  %reading the EEG data
 
     datapoints = eegdata.nsample;
     eegdata = read_eep_cnt(infile,1,datapoints);  %reading the EEG data
     eegdata.data(129,:) = [];                      % last channels seems to be all zeros
-    %eegdata.data(127,:) = [];      % add more similar lines if there are
-                                    % multiple such cases
+    
     eegdata.nchan = size(eegdata.data,1);        %updates 
 
 

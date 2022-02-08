@@ -292,7 +292,7 @@ switch p.Results.colormap
             linspace(200,260,256)']);
     otherwise %Use a Matlab built-in colormap
         % If we do this it creates a figure window!
-        % temp_colormap=colormap(p.Results.colormap);
+        
         
         % This is dirty but doesn't create a window
         try

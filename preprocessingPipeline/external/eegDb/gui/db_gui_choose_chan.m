@@ -12,10 +12,6 @@ end
 how_many_chans = length(chan_names);
 
 
-% wysok = 500;
-% if how_many_chans < 9
-%     wysok = 400;
-% end
 
 max_wysok = 500;
 min_szer = 300;
@@ -80,11 +76,8 @@ uicontrol('Style','pushbutton','String','Go!',...
 
 % Inicjalizuje GUI
 % Normalizacja - aby komponenty zmienialy sie wraz z rozszerzaniem okna
-% set([ hgo htext1 ],'Units','normalized');
 
-% for ch = 1:length(chan_handles)
-%     set(chan_handles{ch},'Units','normalized');
-% end
+
 
 % Nazwa okna
 set(f,'Name','Choose electrodes');

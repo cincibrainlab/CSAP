@@ -16,15 +16,7 @@ else
     seg_pres = false;
 end
 
-% CHANGE: this is used when EEG --> db
-% % reshaping to segment rules
-% if seg_pres
-%     rejected = reshape(zerovec,...
-%         [nseg, EEG.trials/nseg]);
-%     rejected = rejected';
-% else
-%     rejected = zerovec;
-% end
+
 
 
 if (  prerej || ( isempty(db(r).removed))  ) && isfield(...

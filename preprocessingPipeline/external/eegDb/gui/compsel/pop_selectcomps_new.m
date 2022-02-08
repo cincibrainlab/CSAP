@@ -113,7 +113,7 @@ end
 % reject and accept colors,
 COLREJ           = '[1 0.6 0.6]';
 COLACC           = '[0.75 1 0.75]';
-% BACKCOLOR        = [0.8 0.8 0.8];
+
 FIGBACKCOLOR     = [0.93, 0.93, 0.93];
 GUIBUTTONCOLOR   = [0.85 0.85 0.85];
 
@@ -295,7 +295,7 @@ if ~fig_h_passed
     set(0, 'Units', 'pixels');
     scr_sz = get(0, 'ScreenSize');
     set(0, 'Units', unt);
-    % pos = [pos(1) 20 800/7* params.column 600/5* params.rows];
+   
     pos = [round(scr_sz(3) * 0.1), round(scr_sz(4) * 0.1), ...
         round(scr_sz(3) * 0.8), round(scr_sz(4) * 0.8)];
 
@@ -326,7 +326,7 @@ if ~fig_h_passed
     % get current axis position to plot
     % relative to current axes
     pos = get(gca,'position');
-    % hh = gca;
+   
     
     % CHECK - q and s seem to be scaling factors
     % CHANGE - does it make sense to use these

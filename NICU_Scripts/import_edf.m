@@ -24,8 +24,6 @@ function [headerRecord,record] = import_edf(file,readData)
         for signal = 1:headerRecord.numSignals
             headerRecord.physicalMinimum(signal) = str2double(fread(fileID,8,'*char')');
         end
-        %headerRecord.physicalMinimum = sscanf(fread(fileID,8*(headerRecord.numSignals),'*char'),'%f')';
-        %headerRecord.physicalMaximum = sscanf(fread(fileID,8*headerRecord.numSignals,'*char')','%f');
         for signal = 1:headerRecord.numSignals
             headerRecord.physicalMaximum(signal) = str2double(fread(fileID,8,'*char')');
         end

@@ -76,5 +76,4 @@ end
 bi_labels=tmp;
 
 
-%bi_labels=bi_labels{end:-1:1};
 bi_sigs=bi_sigs(end:-1:1,:);

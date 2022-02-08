@@ -116,7 +116,7 @@ if eptp == 1
     
 elseif eptp == 2
     addtx{1} = 'event-locked epoching';
-    % ADD addtx{1} = sprintf('%d event-locked epochs', ep.winlen);
+    
     
     addtx{2} = sprintf('%4.2f to %4.2f s', ep.limits(1), ep.limits(2));
     addtx{3} = 'with respect to:';
@@ -171,9 +171,7 @@ if nmarks > 0
                 '  (', markedP, ')'];
         end
         
-        % NOW there is no btw-mrk spacing
-        % delete last between-mark spacing
-        % addtx(end) = [];
+       
     end
 end 
 
@@ -312,8 +310,7 @@ if ~isempty(h)
 
     if any(tooLong)
 
-        % 6. check which are too long
-        % whichTooLong = find(tooLong);
+        =
 
         % 7. see by how too long
         tooLongBy = lineLen(tooLong) - wrapLen;

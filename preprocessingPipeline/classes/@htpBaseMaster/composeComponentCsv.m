@@ -2,8 +2,6 @@ function composeComponentCsv(obj,sub,pca_rank)
 timetag    = datestr(now,'yymmddHHMM');
 desc = 'Stage4';
 userdesc = 'ComponentSelection_';
-% sub(1).loadDataset('postcomps');
-% pop_selectcomps(pop_runica(sub(1).EEG,'icatype','binica', 'extended',1,'interupt','on','pca',24),1:24);
 pathdb = sub(1).pathdb;
 saveFN = [pathdb.analysis 'A' timetag '_subjTable_' userdesc desc];
 subject_title = 'Subject_';

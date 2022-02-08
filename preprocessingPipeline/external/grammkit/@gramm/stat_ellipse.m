@@ -85,8 +85,7 @@ if sum(~isnan(combx))>2 && sum(~isnan(comby))>2
         obj.results.stat_ellipse{obj.result_ind,1}.major_axis=elaxes(:,1)';
         obj.results.stat_ellipse{obj.result_ind,1}.minor_axis=elaxes(:,2)';
         
-        %plot([0 elaxes(1,1)]+m(1),[0 elaxes(2,1)]+m(2),'k')
-        %plot([0 elaxes(1,2)]+m(1),[0 elaxes(2,2)]+m(2),'k')
+        
         
         switch params.geom
             case 'area'
@@ -98,7 +97,7 @@ if sum(~isnan(combx))>2 && sum(~isnan(comby))>2
         set(hndl,params.patch_opts{:});
         %One matlab version displayed stuff if no output value was set (but
         %crashes 2014a and earlier versions)
-        %tmp = set(hndl,params.patch_opts{:}); 
+         
         
         
         

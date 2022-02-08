@@ -25,23 +25,13 @@ else
     seg_pres = false;
 end
 
-% CHANGE: this is used when EEG --> db
-% % reshaping to segment rules
-% if seg_pres
-%     rejected = reshape(zerovec,...
-%         [nseg, EEG.trials/nseg]);
-%     rejected = rejected';
-% else
-%     rejected = zerovec;
-% end
+
 
 % get rejtypes:
 rejt = db_getrej(db, r);
 
 tmpsz = size(TMPREJ);
-% remfields = {'autorem', 'userrem'};
-% known_auto = {'prob', 'mscl', 'freq'};
-% goes_to    = {'rejjp', 'rejfreq', 'rejfreq'};
+
 
 rejCol = cell2mat({db(r).marks.color}');
 
@@ -92,10 +82,7 @@ for f = 1:size(rejCol, 1)
         adr = 1:orig_numep;
         
         % CHANGE - some commented out code - probably not needed
-        % if femp(db(r), 'prerej') || ~(length(adr) == ...
-        %         size(EEG.data, 3))
-        %     adr(db(r).prerej) = [];
-        % end
+        
         
         % CHANGE
         % this is some quick bugfix, that could 
