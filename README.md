@@ -1,4 +1,4 @@
-# NICU_Processing
+# Cincinnati Semi-Automated Pipeline (CSAP) for Extended Length Neonatal Intensive Care Electroencephalography 
 
 ## Pipeline Developed for preprocessing of Neonatal Datasets
 
